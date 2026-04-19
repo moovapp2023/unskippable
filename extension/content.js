@@ -16,16 +16,23 @@
     { text: "The global economic value of pollination services is estimated at $235–577 billion annually; provided almost entirely by wild and managed insects now in steep decline.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
     // WATER
     { text: "21 of the world's 37 largest aquifers are being depleted faster than they can naturally replenish.", source: "https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015WR017349" },
-    { text: "Agriculture accounts for around 70% of all freshwater withdrawals globally; livestock accounts for roughly 30% of that footprint while occupying 77% of agricultural land.", source: "https://www.fao.org/aquastat/en/" },
     { text: "The Ogallala Aquifer (which irrigates 30% of all US groundwater-fed agriculture) took millions of years to fill and is being drained in decades.", source: "https://www.scientificamerican.com/article/ogallala-aquifer/" },
     // WILDLIFE
     { text: "Monitored wildlife populations have declined by an average of 73% since 1970.", source: "https://livingplanet.panda.org/" },
     { text: "Freshwater species populations have declined by 85% on average since 1970; the sharpest collapse of any habitat type on Earth.", source: "https://livingplanet.panda.org/" },
+    { text: "70% of all birds on Earth are now domesticated poultry; only 30% are wild.", source: "https://www.pnas.org/doi/10.1073/pnas.1711842115" },
+    { text: "In 50 years of trophy fishing photographs from the Florida Keys, the average size of the fish caught shrank from around 20kg to just over 2kg.", source: "https://pubmed.ncbi.nlm.nih.gov/19183214/" },
+    { text: "Species are being lost at an unprecedented rate not seen in 10 million years; nearly 1 in 5 land species are at risk of extinction by the end of the century, driven primarily by agricultural expansion.", source: "https://www.un.org/sustainabledevelopment/blog/2019/05/nature-decline-unprecedented-report/" },
     // CLIMATE
     { text: "The last decade (2014–2023) was the hottest ever recorded.", source: "https://climate.nasa.gov/vital-signs/global-temperature/" },
+    { text: "Globally averaged temperature in 2024 was the warmest in 175 years of record-keeping.", source: "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/" },
     { text: "Global sea levels have risen 21–24cm since 1880, with the rate of rise doubling since 2006.", source: "https://climate.nasa.gov/vital-signs/sea-level/" },
     { text: "The number of recorded climate disasters has increased fivefold over the past 50 years.", source: "https://public.wmo.int/en/media/press-release/wmo-atlas-of-mortality-and-economic-losses" },
+    { text: "The average time between severe climate disasters is now just 12 days, compared to an average of 82 days in the early 1980s.", source: "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/" },
     { text: "CO₂ levels in the atmosphere are now higher than at any point in at least 800,000 years.", source: "https://climate.nasa.gov/vital-signs/carbon-dioxide/" },
+    { text: "There is a 50-50 chance that 2026 will temporarily breach 1.5°C of warming above pre-industrial levels.", source: "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/" },
+    { text: "Based on current global climate policies, we are on track for 2.8°C of warming this century.", source: "https://www.unep.org/resources/emissions-gap-report-2025" },
+    { text: "Global disaster costs in 2024 were 14% above the 2000–2024 average, totalling $368 billion.", source: "https://assets.aon.com/-/media/files/aon/reports/2025/2025-climate-catastrophe-insight.pdf" },
     // OCEANS
     { text: "The 2023–2025 global coral bleaching event (the fourth ever recorded and the most severe in history) impacted 84% of the world's reefs across 82 countries and territories.", source: "https://coralreefwatch.noaa.gov/" },
     { text: "During the first global bleaching event in 1998, 21% of reefs were affected. In 2025, it was 84%.", source: "https://coralreefwatch.noaa.gov/" },
@@ -33,10 +40,9 @@
     { text: "Only 9% of all plastic waste produced globally has ever been recycled.", source: "https://www.ecowatch.com/" },
     { text: "In the United States, the plastic recycling rate is just 5%; despite decades of consumer recycling campaigns.", source: "https://www.ecowatch.com/" },
     // FOOD SYSTEMS
-    { text: "The world needs to produce roughly 60% more food by 2050 to feed a projected population of 9.6 billion; yet climate change is simultaneously reducing our capacity to do so.", source: "https://www.nature.com/" },
     { text: "Every additional degree Celsius of warming reduces global food production capacity by approximately 120 calories per person per day.", source: "https://www.nature.com/" },
     { text: "Climate change is projected to reduce global staple crop yields by 8% by 2050 regardless of future emissions; by 24% by 2100 under a high-emissions scenario.", source: "https://www.nature.com/" },
-    { text: "72% of the world's staple crops are grown in just 5 countries; a synchronized failure across maize, wheat, soybeans, and rice could become possible every 11 years by mid-century.", source: "https://www.woodwellclimate.org/" },
+    { text: "72% of the world's staple crops (maize, wheat, soybeans, and rice) are grown in just 5 countries; a synchronized failure across all four is projected to become possible every 11 years by mid-century.", source: "https://www.woodwellclimate.org/" },
     // HEALTH
     { text: "Microplastics have now been detected in human blood, lungs, placentas, and breast milk.", source: "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822" },
     { text: "A 2024 study found microplastic particles in arterial plaque; patients with higher concentrations had a significantly elevated risk of heart attack and stroke.", source: "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822" },
@@ -46,13 +52,20 @@
     { text: "The ozone layer is on track to fully recover by 2066, thanks to the 1987 Montreal Protocol; the most successful international environmental agreement ever reached.", source: "https://ozone.unep.org/science/assessment/sap" },
     { text: "Global renewable energy capacity grew by 50% in 2023; the fastest rate in 20 years.", source: "https://www.iea.org/reports/renewables-2023" },
     { text: "Protected land areas have grown from 10% to 17% of Earth's land surface since 1990, with an international target of 30% by 2030.", source: "https://www.protectedplanet.net/en" },
+    { text: "Carbon emissions increased less this decade than the previous one.", source: "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/" },
+    { text: "China's carbon emissions (32% of global) appear to have plateaued.", source: "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/" },
+    { text: "In 2024, renewable and nuclear energy together surpassed 40% of global electricity generation for the first time.", source: "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/" },
+    // POLICY
+    { text: "We have proof that fossil fuel companies knew they were driving climate change, yet worked to misinform the public about the science of it.", source: "https://www.budget.senate.gov/chairman/newsroom/press/senate-budget-committee-and-house-oversight-committee-release-comprehensive-report-on-fossil-fuel-industry-s-climate-denial-and-disinformation" },
+    { text: "Global fossil fuel subsidies reached $7 trillion in 2022 — 7.1% of global GDP.", source: "https://www.imf.org/en/Publications/WP/Issues/2023/08/22/IMF-Fossil-Fuel-Subsidies-Data-2023-Update-537281" },
     // 2025
     { text: "2025 became the first full calendar year on record to exceed 1.5°C of warming above pre-industrial levels; the threshold set by the Paris Agreement.", source: "https://climate.copernicus.eu/" },
     { text: "The International Court of Justice declared in 2025 that nations have legally binding obligations to prevent climate harm; a landmark shift in international climate law.", source: "https://www.icj-cij.org/" },
     { text: "Global negotiations for a legally binding plastics treaty collapsed in 2025, leaving no international framework to halt the 8 million tonnes of plastic entering the ocean each year.", source: "https://www.unep.org/" },
     { text: "For the first time, scientists formally attributed specific heatwave deaths to named fossil fuel companies; opening the door to direct legal liability.", source: "https://www.worldweatherattribution.org/" },
-    { text: "The UN High Seas Treaty entered ratification in 2025; the first legal framework ever to govern the high seas, which cover nearly half the planet.", source: "https://www.un.org/bbnjagreement" },
+    { text: "The UN High Seas Treaty entered ratification in 2025, aiming to protect 30% of international ocean waters by 2030; the first legal framework ever to govern the high seas, which cover nearly half the planet.", source: "https://www.un.org/bbnjagreement" },
     { text: "Green sea turtle nesting populations rebounded significantly in 2025; a rare conservation success story driven by decades of international protection efforts.", source: "https://earth.org/" },
+    { text: "The Conejeres Glacier in Colombia was declared extinct in 2025.", source: "https://glaciercasualtylist.rice.edu" },
   ];
 
   let factIndex = 0;

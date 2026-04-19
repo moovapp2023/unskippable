@@ -79,211 +79,295 @@
   {
     "id": 12,
     "category": "water",
-    "text": "Agriculture accounts for around 70% of all freshwater withdrawals globally; livestock alone accounts for roughly 30% of agriculture's total water footprint, while occupying 77% of its land.",
-    "source": "https://www.fao.org/aquastat/en/",
-    "ref": "Mekonnen & Hoekstra 2012; FAO AQUASTAT"
-  },
-  {
-    "id": 13,
-    "category": "water",
     "text": "The Ogallala Aquifer (which irrigates 30% of all US groundwater-fed agriculture) took millions of years to fill and is being drained in decades.",
     "source": "https://www.scientificamerican.com/article/ogallala-aquifer/",
     "ref": "Scientific American / USGS 2023"
   },
   {
-    "id": 14,
+    "id": 13,
     "category": "wildlife",
     "text": "Monitored wildlife populations have declined by an average of 73% since 1970.",
     "source": "https://livingplanet.panda.org/",
     "ref": "WWF Living Planet Report 2024"
   },
   {
-    "id": 15,
+    "id": 14,
     "category": "wildlife",
     "text": "Freshwater species populations have declined by 85% on average since 1970; the sharpest collapse of any habitat type on Earth.",
     "source": "https://livingplanet.panda.org/",
     "ref": "WWF Living Planet Report 2024"
   },
   {
-    "id": 16,
+    "id": 15,
     "category": "climate",
     "text": "The last decade (2014–2023) was the hottest ever recorded.",
     "source": "https://climate.nasa.gov/vital-signs/global-temperature/",
     "ref": "NASA / WMO 2024"
   },
   {
-    "id": 17,
+    "id": 16,
     "category": "climate",
     "text": "Global sea levels have risen 21–24cm since 1880, with the rate of rise doubling since 2006.",
     "source": "https://climate.nasa.gov/vital-signs/sea-level/",
     "ref": "NASA Sea Level Change 2024"
   },
   {
-    "id": 18,
+    "id": 17,
     "category": "climate",
     "text": "The number of recorded climate disasters has increased fivefold over the past 50 years.",
     "source": "https://public.wmo.int/en/media/press-release/wmo-atlas-of-mortality-and-economic-losses",
     "ref": "WMO Atlas of Mortality and Economic Losses 2021"
   },
   {
-    "id": 19,
+    "id": 18,
     "category": "climate",
     "text": "CO₂ levels in the atmosphere are now higher than at any point in at least 800,000 years.",
     "source": "https://climate.nasa.gov/vital-signs/carbon-dioxide/",
     "ref": "NASA / NOAA 2024"
   },
   {
-    "id": 20,
+    "id": 19,
     "category": "oceans",
     "text": "The 2023–2025 global coral bleaching event (the fourth ever recorded and the most severe in history) impacted 84% of the world's reefs across 82 countries and territories.",
     "source": "https://coralreefwatch.noaa.gov/",
     "ref": "ICRI / NOAA Coral Reef Watch, April 2025"
   },
   {
-    "id": 21,
+    "id": 20,
     "category": "oceans",
     "text": "During the first global bleaching event in 1998, 21% of reefs were affected. In 2025, it was 84%.",
     "source": "https://coralreefwatch.noaa.gov/",
     "ref": "ICRI / NOAA Coral Reef Watch, April 2025"
   },
   {
-    "id": 22,
+    "id": 21,
     "category": "oceans",
     "text": "Around 8 million tonnes of plastic enter the world's oceans every year.",
     "source": "https://www.science.org/doi/10.1126/science.1260352",
     "ref": "Jambeck et al., Science 2015"
   },
   {
-    "id": 23,
+    "id": 22,
     "category": "oceans",
     "text": "Only 9% of all plastic waste produced globally has ever been recycled.",
     "source": "https://www.ecowatch.com/",
     "ref": "Tsinghua University / EcoWatch 2025"
   },
   {
-    "id": 24,
+    "id": 23,
     "category": "oceans",
     "text": "In the United States, the plastic recycling rate is just 5%; despite decades of consumer recycling campaigns.",
     "source": "https://www.ecowatch.com/",
     "ref": "EcoWatch 2025"
   },
   {
-    "id": 25,
-    "category": "food",
-    "text": "The world needs to produce roughly 60% more food by 2050 to feed a projected population of 9.6 billion; yet climate change is simultaneously reducing our capacity to do so.",
-    "source": "https://www.nature.com/",
-    "ref": "Climate Impact Lab / Stanford & Rutgers, Nature 2025"
-  },
-  {
-    "id": 26,
+    "id": 24,
     "category": "food",
     "text": "Every additional degree Celsius of warming reduces global food production capacity by approximately 120 calories per person per day.",
     "source": "https://www.nature.com/",
     "ref": "Climate Impact Lab / Stanford & Rutgers, Nature 2025"
   },
   {
-    "id": 27,
+    "id": 25,
     "category": "food",
     "text": "Climate change is projected to reduce global staple crop yields by 8% by 2050 regardless of future emissions; by 24% by 2100 under a high-emissions scenario.",
     "source": "https://www.nature.com/",
     "ref": "Hultgren et al., Nature 2025"
   },
   {
-    "id": 28,
+    "id": 26,
     "category": "food",
     "text": "72% of the world's staple crops (maize, wheat, soybeans, and rice) are grown in just 5 countries; a synchronized failure across all four is projected to become possible every 11 years by mid-century.",
     "source": "https://www.woodwellclimate.org/",
     "ref": "Woodwell Climate Research Center 2025"
   },
   {
-    "id": 29,
+    "id": 27,
     "category": "health",
     "text": "Microplastics have now been detected in human blood, lungs, placentas, and breast milk.",
     "source": "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822",
     "ref": "Multiple peer-reviewed studies 2022–2024"
   },
   {
-    "id": 30,
+    "id": 28,
     "category": "health",
     "text": "A 2024 study found microplastic particles in arterial plaque; patients with higher concentrations had a significantly elevated risk of heart attack and stroke.",
     "source": "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822",
     "ref": "Marfella et al., New England Journal of Medicine 2024"
   },
   {
-    "id": 31,
+    "id": 29,
+    "category": "health",
+    "text": "Atmospheric CO₂ concentrations are projected to reach levels that measurably impair human cognitive function within 50 years; levels already regularly exceeded in poorly ventilated buildings today.",
+    "source": "https://link.springer.com/article/10.1007/s11869-026-01918-5",
+    "ref": "Air Quality, Atmosphere & Health 2026"
+  },
+  {
+    "id": 30,
     "category": "progress",
     "text": "The cost of solar power has fallen by 90% in the last decade; the fastest cost decline of any energy source in history.",
     "source": "https://www.iea.org/reports/world-energy-outlook-2023",
     "ref": "IEA World Energy Outlook 2023"
   },
   {
-    "id": 32,
+    "id": 31,
     "category": "progress",
     "text": "The ozone layer is on track to fully recover by 2066, thanks to the 1987 Montreal Protocol; the most successful international environmental agreement ever reached.",
     "source": "https://ozone.unep.org/science/assessment/sap",
     "ref": "UNEP Scientific Assessment Panel 2022"
   },
   {
-    "id": 33,
+    "id": 32,
     "category": "progress",
     "text": "Global renewable energy capacity grew by 50% in 2023; the fastest rate in 20 years.",
     "source": "https://www.iea.org/reports/renewables-2023",
     "ref": "IEA Renewables 2023"
   },
   {
-    "id": 34,
+    "id": 33,
     "category": "progress",
     "text": "Protected land areas have grown from 10% to 17% of Earth's land surface since 1990, with an international target of 30% by 2030.",
     "source": "https://www.protectedplanet.net/en",
     "ref": "UNEP-WCMC Protected Planet 2023"
   },
   {
-    "id": 35,
+    "id": 34,
     "category": "2025",
     "text": "2025 became the first full calendar year on record to exceed 1.5°C of warming above pre-industrial levels; the threshold set by the Paris Agreement.",
     "source": "https://climate.copernicus.eu/",
     "ref": "Copernicus Climate Change Service 2025"
   },
   {
-    "id": 36,
+    "id": 35,
     "category": "2025",
     "text": "The International Court of Justice declared in 2025 that nations have legally binding obligations to prevent climate harm; a landmark shift in international climate law.",
     "source": "https://www.icj-cij.org/",
     "ref": "ICJ Advisory Opinion 2025"
   },
   {
-    "id": 37,
+    "id": 36,
     "category": "2025",
     "text": "Global negotiations for a legally binding plastics treaty collapsed in 2025, leaving no international framework to halt the 8 million tonnes of plastic entering the ocean each year.",
     "source": "https://www.unep.org/",
     "ref": "UNEP 2025"
   },
   {
-    "id": 38,
+    "id": 37,
     "category": "2025",
     "text": "For the first time, scientists formally attributed specific heatwave deaths to named fossil fuel companies; opening the door to direct legal liability.",
     "source": "https://www.worldweatherattribution.org/",
     "ref": "World Weather Attribution / Climate Attribution Science 2025"
   },
   {
-    "id": 39,
+    "id": 38,
     "category": "2025",
     "text": "The UN High Seas Treaty entered ratification in 2025, aiming to protect 30% of international ocean waters by 2030; the first legal framework ever to govern the high seas, which cover nearly half the planet.",
     "source": "https://www.un.org/bbnjagreement",
     "ref": "United Nations BBNJ Agreement 2025"
   },
   {
-    "id": 40,
+    "id": 39,
     "category": "2025",
     "text": "Green sea turtle nesting populations rebounded significantly in 2025; a rare conservation success story driven by decades of international protection efforts.",
     "source": "https://earth.org/",
     "ref": "Earth.Org 2025"
   },
   {
+    "id": 40,
+    "category": "wildlife",
+    "text": "70% of all birds on Earth are now domesticated poultry; only 30% are wild.",
+    "source": "https://www.pnas.org/doi/10.1073/pnas.1711842115",
+    "ref": "Bar-On, Phillips & Milo, PNAS 2018"
+  },
+  {
     "id": 41,
-    "category": "health",
-    "text": "Atmospheric CO₂ concentrations are projected to reach levels that measurably impair human cognitive function within 50 years; levels already regularly exceeded in poorly ventilated buildings today.",
-    "source": "https://link.springer.com/article/10.1007/s11869-026-01918-5",
-    "ref": "Air Quality, Atmosphere & Health 2026"
+    "category": "wildlife",
+    "text": "In 50 years of trophy fishing photographs from the Florida Keys, the average size of the fish caught shrank from around 20kg to just over 2kg.",
+    "source": "https://pubmed.ncbi.nlm.nih.gov/19183214/",
+    "ref": "McClenachan, Conservation Biology 2009"
+  },
+  {
+    "id": 42,
+    "category": "policy",
+    "text": "We have proof that fossil fuel companies knew they were driving climate change, yet worked to misinform the public about the science of it.",
+    "source": "https://www.budget.senate.gov/chairman/newsroom/press/senate-budget-committee-and-house-oversight-committee-release-comprehensive-report-on-fossil-fuel-industry-s-climate-denial-and-disinformation",
+    "ref": "US Senate Budget Committee & House Oversight Committee, April 2024"
+  },
+  {
+    "id": 43,
+    "category": "policy",
+    "text": "Global fossil fuel subsidies reached $7 trillion in 2022 — 7.1% of global GDP.",
+    "source": "https://www.imf.org/en/Publications/WP/Issues/2023/08/22/IMF-Fossil-Fuel-Subsidies-Data-2023-Update-537281",
+    "ref": "IMF Working Paper 2023/169, Black, Liu & Parry, August 2023"
+  },
+  {
+    "id": 44,
+    "category": "climate",
+    "text": "There is a 50-50 chance that 2026 will temporarily breach 1.5°C of warming above pre-industrial levels.",
+    "source": "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/",
+    "ref": "Bulletin of the Atomic Scientists, 2026 Doomsday Clock Statement"
+  },
+  {
+    "id": 45,
+    "category": "wildlife",
+    "text": "Species are being lost at an unprecedented rate not seen in 10 million years; nearly 1 in 5 land species are at risk of extinction by the end of the century, driven primarily by agricultural expansion.",
+    "source": "https://www.un.org/sustainabledevelopment/blog/2019/05/nature-decline-unprecedented-report/",
+    "ref": "IPBES Global Assessment 2019"
+  },
+  {
+    "id": 46,
+    "category": "climate",
+    "text": "Globally averaged temperature in 2024 was the warmest in 175 years of record-keeping.",
+    "source": "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/",
+    "ref": "Bulletin of the Atomic Scientists, 2026 Doomsday Clock Statement"
+  },
+  {
+    "id": 47,
+    "category": "2025",
+    "text": "The Conejeres Glacier in Colombia was declared extinct in 2025.",
+    "source": "https://glaciercasualtylist.rice.edu",
+    "ref": "Rice University Glacier Casualty List 2025"
+  },
+  {
+    "id": 48,
+    "category": "climate",
+    "text": "The average time between severe climate disasters is now just 12 days, compared to an average of 82 days in the early 1980s.",
+    "source": "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/",
+    "ref": "Bulletin of the Atomic Scientists, 2026 Doomsday Clock Statement"
+  },
+  {
+    "id": 49,
+    "category": "progress",
+    "text": "Carbon emissions increased less this decade than the previous one.",
+    "source": "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/",
+    "ref": "Bulletin of the Atomic Scientists, 2026 Doomsday Clock Statement"
+  },
+  {
+    "id": 50,
+    "category": "progress",
+    "text": "China's carbon emissions (32% of global) appear to have plateaued.",
+    "source": "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/",
+    "ref": "Bulletin of the Atomic Scientists, 2026 Doomsday Clock Statement"
+  },
+  {
+    "id": 51,
+    "category": "progress",
+    "text": "In 2024, renewable and nuclear energy together surpassed 40% of global electricity generation for the first time.",
+    "source": "https://thebulletin.org/doomsday-clock/2026-statement/climate-change/",
+    "ref": "Bulletin of the Atomic Scientists, 2026 Doomsday Clock Statement"
+  },
+  {
+    "id": 52,
+    "category": "climate",
+    "text": "Based on current global climate policies, we are on track for 2.8°C of warming this century.",
+    "source": "https://www.unep.org/resources/emissions-gap-report-2025",
+    "ref": "UNEP Emissions Gap Report 2025"
+  },
+  {
+    "id": 53,
+    "category": "climate",
+    "text": "Global disaster costs in 2024 were 14% above the 2000–2024 average, totalling $368 billion.",
+    "source": "https://assets.aon.com/-/media/files/aon/reports/2025/2025-climate-catastrophe-insight.pdf",
+    "ref": "Aon Climate & Catastrophe Insight 2025"
   }
 ]
