@@ -43,9 +43,9 @@
       white-space: nowrap;
       display: block;
       color: var(--text);
-      transform: scaleY(0.58);
       transform-origin: top left;
       line-height: 1;
+      transition: transform 0.1s ease-out;
     }
 
     /* ── CENTERED COLUMN ── */
@@ -278,10 +278,23 @@
 
     @media (max-width: 600px) {
       .col { padding: 0 20px; }
-      .steps { flex-direction: column; }
+      .hero { padding: 36px 0 52px; }
+      .hero-tagline { font-size: clamp(20px, 5.5vw, 24px); margin-bottom: 28px; }
+      .hero-sub { font-size: 11px; }
+      .btn-install { font-size: 13px; padding: 13px 20px; }
+      .steps { flex-direction: column; gap: 10px; }
+      .step { padding: 16px; }
+      .steps-section { padding: 36px 0 48px; }
+      .demo { padding: 36px 0 48px; }
+      .ticker { padding: 36px 0 48px; }
+      .ticker-inner { padding: 20px; }
+      .feedback-section { padding: 36px 0 52px; }
       .feedback-types { flex-direction: column; }
       .feedback-row { flex-direction: column; }
-      footer { padding-left: 20px; padding-right: 20px; }
+      .feedback-form textarea { min-height: 120px; font-size: 16px; }
+      .feedback-form input[type="email"] { font-size: 16px; }
+      .btn-submit { width: 100%; }
+      footer { padding-left: 20px; padding-right: 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
     }
   </style>
 </head>
@@ -337,7 +350,6 @@
           </div>
         </div>
       </div>
-      <p class="demo-caption">Appended automatically to every email. Recipients see it like any other signature.</p>
     </section>
   </div>
 
@@ -426,20 +438,28 @@
   </footer>
 
   <script>
-    // ── Wordmarks: measure as inline-block, render as block ──
+    // ── Wordmarks: fixed height, scaleX to fill width (squeeze effect) ──
     const wms = document.querySelectorAll('.wm');
+    // Base font size determines the visual height of the wordmark.
+    // scaleY(0.58) is applied on top, so visual height ≈ BASE_SIZE * 0.58.
+    const BASE_SIZE = 130; // px — adjust to taste
+
     function fitWordmarks() {
-      wms[0].style.fontSize = '100px';
+      // Measure natural text width at base size (no transform applied)
+      wms[0].style.fontSize = BASE_SIZE + 'px';
+      wms[0].style.transform = 'none';
       wms[0].style.display = 'inline-block';
       const naturalWidth = wms[0].getBoundingClientRect().width;
       wms[0].style.display = 'block';
-      // Subtract the trailing letter-spacing (0.28em × 100px) so the last
-      // character's right edge reaches the viewport edge, not the spacing after it
-      const contentWidth = naturalWidth - (0.28 * 100);
-      const fontSize = 100 * document.documentElement.clientWidth / contentWidth;
-      const compensation = -(fontSize * 0.42);
+
+      // Subtract trailing letter-spacing so last character reaches the edge
+      const contentWidth = naturalWidth - (0.28 * BASE_SIZE);
+      const scaleX = document.documentElement.clientWidth / contentWidth;
+      const compensation = -(BASE_SIZE * 0.42);
+
       wms.forEach(wm => {
-        wm.style.fontSize = fontSize + 'px';
+        wm.style.fontSize = BASE_SIZE + 'px';
+        wm.style.transform = `scaleX(${scaleX}) scaleY(0.58)`;
         wm.style.marginBottom = compensation + 'px';
       });
     }
