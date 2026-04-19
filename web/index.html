@@ -35,7 +35,6 @@
       overflow: hidden;
       padding-top: 10px;
     }
-
     .wm {
       font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
       font-weight: 900;
@@ -47,32 +46,17 @@
       transform: scaleY(0.58);
       transform-origin: top left;
       line-height: 1;
-      /* font-size and margin-bottom set by JS */
     }
 
-    /* ── MAIN TWO-COLUMN LAYOUT ── */
-    .main-layout {
-      display: flex;
-      align-items: flex-start;
-      gap: 40px;
+    /* ── CENTERED COLUMN ── */
+    .col {
+      max-width: 760px;
+      margin: 0 auto;
       padding: 0 40px;
-      margin-top: 52px;
-    }
-
-    .content-left {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .content-right {
-      width: 50%;
-      flex-shrink: 0;
-      position: sticky;
-      top: 24px;
     }
 
     /* ── HERO ── */
-    .hero { padding-bottom: 64px; }
+    .hero { padding: 56px 0 72px; }
 
     .hero-tagline {
       font-size: clamp(18px, 2.5vw, 24px);
@@ -98,15 +82,27 @@
       transition: opacity 0.15s, transform 0.15s;
     }
     .btn-install:hover { opacity: 0.88; transform: translateY(-1px); }
-    .btn-install svg { flex-shrink: 0; }
-
     .hero-sub { margin-top: 14px; font-size: 12px; color: var(--muted); }
 
-    /* ── DEMO ── */
-    .demo {
+    /* ── STEPS ── */
+    .steps-section {
       padding: 52px 0 64px;
       border-top: 1px solid var(--border);
     }
+    .steps { display: flex; gap: 12px; }
+    .step {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .step-num { font-size: 11px; font-weight: bold; letter-spacing: 0.1em; color: var(--green); margin-bottom: 8px; }
+    .step-title { font-size: 14px; font-weight: bold; margin-bottom: 4px; }
+    .step-desc { font-size: 12px; color: var(--dim); line-height: 1.5; }
+
+    /* ── DEMO ── */
+    .demo { padding: 52px 0 64px; border-top: 1px solid var(--border); }
 
     .section-label {
       font-size: 11px;
@@ -122,9 +118,7 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 24px 60px rgba(0,0,0,0.6);
-      max-width: 560px;
     }
-
     .email-chrome {
       background: #f1f3f4;
       padding: 10px 14px;
@@ -137,107 +131,82 @@
     .chrome-dot:nth-child(1) { background: #ff5f57; }
     .chrome-dot:nth-child(2) { background: #febc2e; }
     .chrome-dot:nth-child(3) { background: #28c840; }
-
     .email-header { padding: 14px 20px 10px; border-bottom: 1px solid #e0e0e0; }
     .email-subject { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #202124; margin-bottom: 3px; }
     .email-meta { font-family: Arial, sans-serif; font-size: 12px; color: #5f6368; }
-
-    .email-body {
-      padding: 18px 20px 20px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      color: #202124;
-      line-height: 1.6;
-    }
+    .email-body { padding: 18px 20px 20px; font-family: Arial, sans-serif; font-size: 14px; color: #202124; line-height: 1.6; }
     .email-body p { margin-bottom: 10px; }
-
     .uc-block { margin-top: 14px; padding-top: 11px; border-top: 1px solid #e0e0e0; }
     .uc-wordmark-email {
       font-family: 'Arial Black', Impact, sans-serif;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      display: inline-block;
-      transform: scaleY(0.58);
-      transform-origin: bottom left;
-      color: #bbb;
-      line-height: 1;
-      margin-bottom: 6px;
+      font-size: 12px; font-weight: 900; letter-spacing: 0.28em; text-transform: uppercase;
+      display: inline-block; transform: scaleY(0.58); transform-origin: bottom left;
+      color: #bbb; line-height: 1; margin-bottom: 6px;
     }
     .uc-fact { font-family: Arial, sans-serif; font-size: 12px; color: #555; }
     .uc-fact a { color: #1a73e8; text-decoration: none; font-size: 11px; }
     .demo-caption { margin-top: 14px; font-size: 12px; color: var(--muted); }
 
     /* ── FACTS TICKER ── */
-    .ticker {
-      padding: 52px 0 64px;
-      border-top: 1px solid var(--border);
-    }
-
+    .ticker { padding: 52px 0 64px; border-top: 1px solid var(--border); }
     .ticker-inner {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 28px;
       min-height: 110px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 20px;
+      display: flex; flex-direction: column;
+      justify-content: space-between; gap: 20px;
     }
-
-    .ticker-fact {
-      font-size: clamp(14px, 2vw, 17px);
-      color: var(--text);
-      line-height: 1.5;
-      transition: opacity 0.4s;
-    }
+    .ticker-fact { font-size: clamp(14px, 2vw, 17px); color: var(--text); line-height: 1.5; transition: opacity 0.4s; }
     .ticker-fact.fade { opacity: 0; }
-
     .ticker-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .ticker-source { font-size: 11px; color: var(--muted); text-decoration: none; }
     .ticker-source:hover { color: var(--dim); }
     .ticker-nav { display: flex; gap: 8px; }
     .ticker-btn {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--dim);
-      width: 28px; height: 28px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 13px;
-      display: flex; align-items: center; justify-content: center;
+      background: none; border: 1px solid var(--border); color: var(--dim);
+      width: 28px; height: 28px; border-radius: 6px; cursor: pointer;
+      font-size: 13px; display: flex; align-items: center; justify-content: center;
       transition: border-color 0.15s, color 0.15s;
     }
     .ticker-btn:hover { border-color: var(--dim); color: var(--text); }
     .ticker-count { font-size: 11px; color: var(--muted); align-self: center; }
 
-    /* ── FEEDBACK (right sticky column) ── */
-    .feedback-panel {
+    /* ── FEEDBACK ── */
+    .feedback-section { padding: 52px 0 72px; border-top: 1px solid var(--border); }
+    .feedback-section h2 { font-size: clamp(22px, 3vw, 30px); font-weight: bold; margin-bottom: 6px; }
+    .feedback-section > .col > p { font-size: 14px; color: var(--dim); margin-bottom: 28px; }
+
+    .feedback-types {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .type-btn {
+      flex: 1;
       background: var(--surface);
-      border: 1px solid #333;
-      border-radius: 16px;
-      padding: 36px;
-    }
-
-    .feedback-panel h3 {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: var(--text);
-    }
-
-    .feedback-panel p {
-      font-size: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
       color: var(--dim);
-      margin-bottom: 24px;
-      line-height: 1.5;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 14px 12px;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+      text-align: center;
+      line-height: 1.3;
     }
+    .type-btn .type-icon { font-size: 18px; display: block; margin-bottom: 5px; }
+    .type-btn:hover { border-color: #444; color: var(--text); }
+    .type-btn.active { border-color: var(--green); color: var(--text); background: rgba(74,222,128,0.06); }
 
-    .feedback-panel textarea {
+    .feedback-form { display: flex; flex-direction: column; gap: 12px; }
+
+    .feedback-form textarea {
       width: 100%;
-      background: var(--bg);
+      background: var(--surface);
       border: 1px solid #333;
       border-radius: 10px;
       color: var(--text);
@@ -246,17 +215,18 @@
       line-height: 1.6;
       padding: 16px 18px;
       resize: vertical;
-      min-height: 180px;
+      min-height: 160px;
       transition: border-color 0.15s;
       outline: none;
-      margin-bottom: 12px;
     }
-    .feedback-panel textarea::placeholder { color: var(--muted); }
-    .feedback-panel textarea:focus { border-color: #555; }
+    .feedback-form textarea::placeholder { color: var(--muted); }
+    .feedback-form textarea:focus { border-color: #555; }
 
-    .feedback-panel input[type="email"] {
-      width: 100%;
-      background: var(--bg);
+    .feedback-row { display: flex; gap: 10px; }
+
+    .feedback-form input[type="email"] {
+      flex: 1;
+      background: var(--surface);
       border: 1px solid #333;
       border-radius: 10px;
       color: var(--text);
@@ -265,13 +235,12 @@
       padding: 14px 18px;
       transition: border-color 0.15s;
       outline: none;
-      margin-bottom: 12px;
+      min-width: 0;
     }
-    .feedback-panel input[type="email"]::placeholder { color: var(--muted); }
-    .feedback-panel input[type="email"]:focus { border-color: #555; }
+    .feedback-form input[type="email"]::placeholder { color: var(--muted); }
+    .feedback-form input[type="email"]:focus { border-color: #555; }
 
     .btn-submit {
-      width: 100%;
       background: var(--green);
       color: #0b0b0b;
       border: none;
@@ -280,48 +249,38 @@
       font-size: 15px;
       font-weight: bold;
       letter-spacing: 0.04em;
-      padding: 16px;
+      padding: 14px 28px;
       cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
       transition: opacity 0.15s;
     }
     .btn-submit:hover { opacity: 0.85; }
     .btn-submit:disabled { opacity: 0.4; cursor: default; }
-
-    .feedback-thanks { font-size: 14px; color: var(--green); display: none; margin-top: 16px; text-align: center; }
+    .feedback-thanks { font-size: 14px; color: var(--green); display: none; padding-top: 4px; }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
       padding: 28px 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 40px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
     }
-
     .footer-wordmark {
       font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 900;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      display: inline-block;
-      transform: scaleY(0.58);
-      transform-origin: bottom left;
-      line-height: 1;
-      font-size: 11px;
-      color: var(--muted);
+      font-weight: 900; letter-spacing: 0.28em; text-transform: uppercase;
+      display: inline-block; transform: scaleY(0.58); transform-origin: bottom left;
+      line-height: 1; font-size: 11px; color: var(--muted);
     }
-
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
     .footer-links a:hover { color: var(--dim); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 760px) {
-      .main-layout { flex-direction: column; padding: 0 20px; }
-      .content-right { width: 100%; position: static; }
+    @media (max-width: 600px) {
+      .col { padding: 0 20px; }
+      .steps { flex-direction: column; }
+      .feedback-types { flex-direction: column; }
+      .feedback-row { flex-direction: column; }
       footer { padding-left: 20px; padding-right: 20px; }
     }
   </style>
@@ -330,97 +289,132 @@
 
   <!-- WORDMARK STACK -->
   <div class="wordmarks-stack">
-    <span class="wm" style="opacity: 1;">Unskippable</span>
-    <span class="wm" style="opacity: 0.28;">Unskippable</span>
-    <span class="wm" style="opacity: 0.08;">Unskippable</span>
+    <span class="wm" style="opacity:1;">Unskippable</span>
+    <span class="wm" style="opacity:0.28;">Unskippable</span>
+    <span class="wm" style="opacity:0.08;">Unskippable</span>
   </div>
 
-  <!-- MAIN LAYOUT -->
-  <div class="main-layout">
+  <!-- HERO -->
+  <div class="col">
+    <section class="hero">
+      <p class="hero-tagline">
+        A <em>climate fact</em> in every email you send.<br>
+        Free. Automatic. Unskippable.
+      </p>
+      <a href="https://chrome.google.com/webstore" class="btn-install">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <circle cx="9" cy="9" r="8.5" stroke="#0b0b0b" stroke-opacity="0.3"/>
+          <path d="M9 5v5.5M9 10.5l-2-2M9 10.5l2-2" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M5.5 13h7" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Add to Chrome — it's free
+      </a>
+      <p class="hero-sub">Gmail only &nbsp;·&nbsp; No account needed &nbsp;·&nbsp; 41 sourced facts</p>
+    </section>
+  </div>
 
-    <!-- LEFT: content -->
-    <div class="content-left">
+  <!-- STEPS -->
+  <div class="col">
+    <section class="steps-section">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-title">Install</div>
+          <div class="step-desc">One click from the Chrome Web Store. No signup, no data collected.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-title">Write emails normally</div>
+          <div class="step-desc">Open Gmail, compose as usual. A fact appears automatically at the top or bottom.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-title">Every send counts</div>
+          <div class="step-desc">41 sourced facts rotate across forests, oceans, food systems, climate, and more.</div>
+        </div>
+      </div>
+    </section>
+  </div>
 
-      <!-- HERO -->
-      <section class="hero">
-        <p class="hero-tagline">
-          A <em>climate fact</em> in every email you send.<br>
-          Free. Automatic. Unskippable.
-        </p>
-        <a href="https://chrome.google.com/webstore" class="btn-install" id="install">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <circle cx="9" cy="9" r="8.5" stroke="#0b0b0b" stroke-opacity="0.3"/>
-            <path d="M9 5v5.5M9 10.5l-2-2M9 10.5l2-2" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M5.5 13h7" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          Add to Chrome — it's free
-        </a>
-        <p class="hero-sub">Gmail only &nbsp;·&nbsp; No account needed &nbsp;·&nbsp; 41 sourced facts</p>
-      </section>
-
-      <!-- DEMO -->
-      <section class="demo">
-        <div class="section-label">What it looks like</div>
-        <div class="email-mock">
-          <div class="email-chrome">
-            <div class="chrome-dot"></div>
-            <div class="chrome-dot"></div>
-            <div class="chrome-dot"></div>
+  <!-- DEMO -->
+  <div class="col">
+    <section class="demo">
+      <div class="section-label">What it looks like</div>
+      <div class="email-mock">
+        <div class="email-chrome">
+          <div class="chrome-dot"></div><div class="chrome-dot"></div><div class="chrome-dot"></div>
+        </div>
+        <div class="email-header">
+          <div class="email-subject">Re: Quarterly targets</div>
+          <div class="email-meta">To: sarah@company.com</div>
+        </div>
+        <div class="email-body">
+          <p>Makes sense, let's sync Thursday. I'll send a calendar invite.</p>
+          <p>Talk soon,<br>Owen</p>
+          <div class="uc-block">
+            <div><span class="uc-wordmark-email">Unskippable</span></div>
+            <span class="uc-fact">
+              🌍 <span id="demo-text">The last decade (2014–2023) was the hottest ever recorded.</span>
+              <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">↗ source</a>
+            </span>
           </div>
-          <div class="email-header">
-            <div class="email-subject">Re: Quarterly targets</div>
-            <div class="email-meta">To: sarah@company.com</div>
-          </div>
-          <div class="email-body">
-            <p>Makes sense, let's sync Thursday. I'll send a calendar invite.</p>
-            <p>Talk soon,<br>Owen</p>
-            <div class="uc-block">
-              <div><span class="uc-wordmark-email">Unskippable</span></div>
-              <span class="uc-fact">
-                🌍 <span id="demo-text">The last decade (2014–2023) was the hottest ever recorded.</span>
-                <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">↗ source</a>
-              </span>
+        </div>
+      </div>
+      <p class="demo-caption">Appended automatically to every email. Recipients see it like any other signature.</p>
+    </section>
+  </div>
+
+  <!-- FACTS TICKER -->
+  <div class="col">
+    <section class="ticker">
+      <div class="section-label">The facts</div>
+      <div class="ticker-inner">
+        <p class="ticker-fact" id="ticker-text"></p>
+        <div class="ticker-meta">
+          <a href="#" class="ticker-source" id="ticker-source" target="_blank">↗ source</a>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="ticker-count" id="ticker-count"></span>
+            <div class="ticker-nav">
+              <button class="ticker-btn" id="ticker-prev">‹</button>
+              <button class="ticker-btn" id="ticker-next">›</button>
             </div>
           </div>
         </div>
-        <p class="demo-caption">Appended automatically to every email. Recipients see it like any other signature.</p>
-      </section>
+      </div>
+    </section>
+  </div>
 
-      <!-- FACTS TICKER -->
-      <section class="ticker">
-        <div class="section-label">The facts</div>
-        <div class="ticker-inner">
-          <p class="ticker-fact" id="ticker-text"></p>
-          <div class="ticker-meta">
-            <a href="#" class="ticker-source" id="ticker-source" target="_blank">↗ source</a>
-            <div style="display:flex;align-items:center;gap:10px;">
-              <span class="ticker-count" id="ticker-count"></span>
-              <div class="ticker-nav">
-                <button class="ticker-btn" id="ticker-prev">‹</button>
-                <button class="ticker-btn" id="ticker-next">›</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+  <!-- FEEDBACK -->
+  <section class="feedback-section">
+    <div class="col">
+      <h2>Get involved</h2>
+      <p>Help us keep the facts sharp and growing.</p>
 
-    </div><!-- /content-left -->
+      <div class="feedback-types">
+        <button class="type-btn active" data-type="suggest">
+          <span class="type-icon">＋</span>
+          Suggest a fact
+        </button>
+        <button class="type-btn" data-type="correct">
+          <span class="type-icon">✎</span>
+          Correct a fact
+        </button>
+        <button class="type-btn" data-type="other">
+          <span class="type-icon">◎</span>
+          Other feedback
+        </button>
+      </div>
 
-    <!-- RIGHT: sticky feedback -->
-    <div class="content-right">
-      <div class="feedback-panel">
-        <h3>Tell us what you think</h3>
-        <p>Love it, hate it, have a suggestion — we read everything.</p>
-        <form id="feedback-form">
-          <textarea name="message" placeholder="What's on your mind?"></textarea>
+      <form class="feedback-form" id="feedback-form">
+        <textarea id="feedback-msg" name="message" placeholder="Got a well-sourced climate fact we should add? Paste it here along with the source link."></textarea>
+        <div class="feedback-row">
           <input type="email" name="email" placeholder="Your email (optional)">
           <button type="submit" class="btn-submit" id="submit-btn">Send</button>
-          <p class="feedback-thanks" id="feedback-thanks">Thanks — we got it. ✓</p>
-        </form>
-      </div>
+        </div>
+        <p class="feedback-thanks" id="feedback-thanks">Thanks — we got it. ✓</p>
+      </form>
     </div>
-
-  </div><!-- /main-layout -->
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -432,40 +426,50 @@
   </footer>
 
   <script>
-    // ── Fit wordmarks to exact page width ──
+    // ── Wordmarks: measure as inline-block, render as block ──
     const wms = document.querySelectorAll('.wm');
     function fitWordmarks() {
-      // Measure as inline-block so we get text width, not container width
       wms[0].style.fontSize = '100px';
       wms[0].style.display = 'inline-block';
       const naturalWidth = wms[0].getBoundingClientRect().width;
       wms[0].style.display = 'block';
-
       const fontSize = 100 * document.documentElement.clientWidth / naturalWidth;
-      const compensation = -(fontSize * 0.42); // collapse extra layout space from scaleY(0.58)
-
+      const compensation = -(fontSize * 0.42);
       wms.forEach(wm => {
         wm.style.fontSize = fontSize + 'px';
         wm.style.marginBottom = compensation + 'px';
       });
-
-      // Align feedback panel to start below the hero
-      const hero = document.querySelector('.hero');
-      document.querySelector('.content-right').style.paddingTop = hero.offsetHeight + 'px';
     }
     fitWordmarks();
     window.addEventListener('resize', fitWordmarks);
+
+    // ── Feedback type toggle ──
+    const placeholders = {
+      suggest: "Got a well-sourced climate fact we should add? Paste it here along with the source link.",
+      correct: "Which fact needs correcting, and what's wrong with it? Include a better source if you have one.",
+      other:   "Love it, hate it, have a thought — we read everything.",
+    };
+    const typeButtons = document.querySelectorAll('.type-btn');
+    const msgArea = document.getElementById('feedback-msg');
+    let selectedType = 'suggest';
+
+    typeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        typeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedType = btn.dataset.type;
+        msgArea.placeholder = placeholders[selectedType];
+      });
+    });
 
     // ── Facts ──
     const FACTS = [
       { text: "Since 1990, the world has lost 420 million hectares of forest — an area larger than the European Union.", source: "https://www.fao.org/state-of-forests/en/" },
       { text: "Tropical forests once covered 12% of Earth's land. Today they cover around 5%.", source: "https://www.globalforestwatch.org" },
-      { text: "The world loses approximately 10 million hectares of forest per year — down from 16 million in 1990, but from a much smaller remaining base.", source: "https://www.fao.org/state-of-forests/en/" },
       { text: "Half of all habitable land on Earth is used for agriculture — and 77% of that is dedicated to livestock.", source: "https://ourworldindata.org/global-land-for-agriculture" },
       { text: "77% of agricultural land is used for livestock — yet animal products provide only 18% of the world's calories.", source: "https://science.sciencemag.org/content/360/6392/987" },
-      { text: "Agricultural expansion drives up to 90% of global tropical deforestation.", source: "https://www.fao.org/sustainability/news/detail/en/c/1274219/" },
-      { text: "Three-quarters of the world's crop species depend on pollinators — insects underpin 35% of global food production, including most fruits, nuts, and vegetables.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
-      { text: "Approximately 40% of invertebrate pollinator species — including bees and butterflies — are currently at risk of extinction.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
+      { text: "Three-quarters of the world's crop species depend on pollinators — insects underpin 35% of global food production.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
+      { text: "Approximately 40% of invertebrate pollinator species are currently at risk of extinction.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
       { text: "21 of the world's 37 largest aquifers are being depleted faster than they can naturally replenish.", source: "https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015WR017349" },
       { text: "The Ogallala Aquifer — which irrigates 30% of all US groundwater-fed agriculture — took millions of years to fill and is being drained in decades.", source: "https://www.scientificamerican.com/article/ogallala-aquifer/" },
       { text: "Monitored wildlife populations have declined by an average of 73% since 1970.", source: "https://livingplanet.panda.org/" },
@@ -473,18 +477,18 @@
       { text: "The last decade (2014–2023) was the hottest ever recorded.", source: "https://climate.nasa.gov/vital-signs/global-temperature/" },
       { text: "Global sea levels have risen 21–24cm since 1880, with the rate of rise doubling since 2006.", source: "https://climate.nasa.gov/vital-signs/sea-level/" },
       { text: "CO₂ levels in the atmosphere are now higher than at any point in at least 800,000 years.", source: "https://climate.nasa.gov/vital-signs/carbon-dioxide/" },
-      { text: "The 2023–2025 global coral bleaching event — the fourth ever recorded and the most severe in history — impacted 84% of the world's reefs across 82 countries.", source: "https://coralreefwatch.noaa.gov/" },
+      { text: "The 2023–2025 coral bleaching event impacted 84% of the world's reefs across 82 countries — the most severe ever recorded.", source: "https://coralreefwatch.noaa.gov/" },
       { text: "Around 8 million tonnes of plastic enter the world's oceans every year.", source: "https://www.science.org/doi/10.1126/science.1260352" },
       { text: "Only 9% of all plastic waste produced globally has ever been recycled.", source: "https://www.ecowatch.com/" },
-      { text: "Every additional degree Celsius of warming reduces global food production capacity by approximately 120 calories per person per day.", source: "https://www.nature.com/" },
+      { text: "Every additional degree Celsius of warming reduces global food production capacity by ~120 calories per person per day.", source: "https://www.nature.com/" },
       { text: "72% of the world's staple crops are grown in just 5 countries — a synchronized failure could become possible every 11 years by mid-century.", source: "https://www.woodwellclimate.org/" },
-      { text: "Microplastics have now been detected in human blood, lungs, placentas, and breast milk.", source: "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822" },
+      { text: "Microplastics have been detected in human blood, lungs, placentas, and breast milk.", source: "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822" },
       { text: "The cost of solar power has fallen by 90% in the last decade — the fastest cost decline of any energy source in history.", source: "https://www.iea.org/reports/world-energy-outlook-2023" },
-      { text: "The ozone layer is on track to fully recover by 2066, thanks to the 1987 Montreal Protocol — the most successful international environmental agreement ever reached.", source: "https://ozone.unep.org/science/assessment/sap" },
+      { text: "The ozone layer is on track to fully recover by 2066 — the most successful international environmental agreement ever reached.", source: "https://ozone.unep.org/science/assessment/sap" },
       { text: "2025 became the first full calendar year on record to exceed 1.5°C of warming above pre-industrial levels.", source: "https://climate.copernicus.eu/" },
-      { text: "The International Court of Justice declared in 2025 that nations have legally binding obligations to prevent climate harm.", source: "https://www.icj-cij.org/" },
-      { text: "For the first time, scientists formally attributed specific heatwave deaths to named fossil fuel companies — opening the door to direct legal liability.", source: "https://www.worldweatherattribution.org/" },
-      { text: "The UN High Seas Treaty entered ratification in 2025 — the first legal framework ever to govern the high seas, which cover nearly half the planet.", source: "https://www.un.org/bbnjagreement" },
+      { text: "The ICJ declared in 2025 that nations have legally binding obligations to prevent climate harm.", source: "https://www.icj-cij.org/" },
+      { text: "For the first time, scientists formally attributed specific heatwave deaths to named fossil fuel companies.", source: "https://www.worldweatherattribution.org/" },
+      { text: "The UN High Seas Treaty entered ratification in 2025 — the first legal framework ever to govern the high seas.", source: "https://www.un.org/bbnjagreement" },
     ];
 
     let tickerIndex = 0;
@@ -502,26 +506,16 @@
         tickerText.classList.remove('fade');
       }, 380);
     }
-
-    document.getElementById('ticker-next').addEventListener('click', () => {
-      tickerIndex = (tickerIndex + 1) % FACTS.length;
-      showFact(tickerIndex);
-    });
-    document.getElementById('ticker-prev').addEventListener('click', () => {
-      tickerIndex = (tickerIndex - 1 + FACTS.length) % FACTS.length;
-      showFact(tickerIndex);
-    });
+    document.getElementById('ticker-next').addEventListener('click', () => { tickerIndex = (tickerIndex + 1) % FACTS.length; showFact(tickerIndex); });
+    document.getElementById('ticker-prev').addEventListener('click', () => { tickerIndex = (tickerIndex - 1 + FACTS.length) % FACTS.length; showFact(tickerIndex); });
     showFact(0);
-    setInterval(() => {
-      tickerIndex = (tickerIndex + 1) % FACTS.length;
-      showFact(tickerIndex);
-    }, 6000);
+    setInterval(() => { tickerIndex = (tickerIndex + 1) % FACTS.length; showFact(tickerIndex); }, 6000);
 
-    // ── Demo fact cycle ──
+    // ── Demo cycle ──
     const demoText = document.getElementById('demo-text');
     const demoFacts = [
       "The last decade (2014–2023) was the hottest ever recorded.",
-      "77% of agricultural land is used for livestock — yet animal products provide only 18% of calories.",
+      "77% of agricultural land is used for livestock — yet it provides only 18% of calories.",
       "Monitored wildlife populations have declined by an average of 73% since 1970.",
       "Around 8 million tonnes of plastic enter the world's oceans every year.",
     ];
@@ -533,7 +527,7 @@
       setTimeout(() => { demoText.textContent = demoFacts[demoIdx]; demoText.style.opacity = 1; }, 350);
     }, 5000);
 
-    // ── Feedback form ──
+    // ── Feedback ──
     const FORMSPREE_URL = 'https://formspree.io/f/mdayzlpb';
     document.getElementById('feedback-form').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -541,15 +535,13 @@
       const thanks = document.getElementById('feedback-thanks');
       const form = e.target;
       if (!form.message.value.trim()) return;
-
       btn.disabled = true;
       btn.textContent = 'Sending…';
-
       try {
         const res = await fetch(FORMSPREE_URL, {
           method: 'POST',
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: form.message.value, email: form.email.value }),
+          body: JSON.stringify({ type: selectedType, message: form.message.value, email: form.email.value }),
         });
         if (res.ok) {
           form.message.value = '';
@@ -557,13 +549,9 @@
           thanks.style.display = 'block';
           btn.style.display = 'none';
         } else {
-          btn.disabled = false;
-          btn.textContent = 'Send';
+          btn.disabled = false; btn.textContent = 'Send';
         }
-      } catch {
-        btn.disabled = false;
-        btn.textContent = 'Send';
-      }
+      } catch { btn.disabled = false; btn.textContent = 'Send'; }
     });
   </script>
 </body>
