@@ -456,7 +456,15 @@
       // Subtract trailing letter-spacing so last character reaches the edge
       const contentWidth = naturalWidth - (0.28 * BASE_SIZE);
       const scaleX = document.documentElement.clientWidth / contentWidth;
-      const compensation = -(BASE_SIZE * 0.42);
+
+      // Apply transform to first wm, measure the gap between layout box and
+      // visual height, then apply the same negative margin to all.
+      wms[0].style.fontSize = BASE_SIZE + 'px';
+      wms[0].style.transform = `scaleX(${scaleX}) scaleY(0.58)`;
+      wms[0].style.marginBottom = '0px';
+      const layoutH = wms[0].getBoundingClientRect().height; // visual height after transform
+      // Layout box is BASE_SIZE tall; gap = BASE_SIZE - visual height
+      const compensation = -(BASE_SIZE - layoutH);
 
       wms.forEach(wm => {
         wm.style.fontSize = BASE_SIZE + 'px';
