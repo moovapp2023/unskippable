@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Unskippable Climate</title>
   <meta name="description" content="A climate fact in every email you send. Free Chrome extension for Gmail.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='95' font-family='Arial Black,Arial,sans-serif' font-weight='900' fill='%23111'>U</text></svg>">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -33,7 +34,6 @@
     .wordmarks-stack {
       width: 100%;
       overflow: hidden;
-      padding-top: 10px;
     }
     .wm {
       font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
@@ -455,12 +455,16 @@
       // Subtract trailing letter-spacing so last character reaches the edge
       const contentWidth = naturalWidth - (0.28 * BASE_SIZE);
       const scaleX = document.documentElement.clientWidth / contentWidth;
-      const compensation = -(BASE_SIZE * 0.42);
+      // Each wm's layout box is BASE_SIZE tall; scaleY(0.58) visually shrinks
+      // it to BASE_SIZE*0.58, leaving BASE_SIZE*0.42 of empty space below.
+      // Negative marginBottom pulls the next sibling up to close that gap.
+      const gap = -(BASE_SIZE * 0.42);
 
-      wms.forEach(wm => {
+      wms.forEach((wm, i) => {
         wm.style.fontSize = BASE_SIZE + 'px';
         wm.style.transform = `scaleX(${scaleX}) scaleY(0.58)`;
-        wm.style.marginBottom = compensation + 'px';
+        // Last wordmark: only close its own gap, don't pull the hero up
+        wm.style.marginBottom = gap + 'px';
       });
     }
     fitWordmarks();
