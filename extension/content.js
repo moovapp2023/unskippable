@@ -12,12 +12,12 @@
     { text: "Agricultural expansion drives up to 90% of global tropical deforestation.", source: "https://www.fao.org/sustainability/news/detail/en/c/1274219/" },
     { text: "A third of the world's agricultural land has been degraded by erosion in the past 40 years.", source: "https://www.theguardian.com/environment/2015/dec/02/arable-land-soil-food-security-erosion" },
     { text: "Three-quarters of the world's crop species depend on pollinators; insects underpin 35% of global food production, including most fruits, nuts, and vegetables.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
-    { text: "Approximately 40% of invertebrate pollinator species; including bees and butterflies; are currently at risk of extinction.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
+    { text: "Approximately 40% of invertebrate pollinator species (including bees and butterflies) are currently at risk of extinction.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
     { text: "The global economic value of pollination services is estimated at $235–577 billion annually; provided almost entirely by wild and managed insects now in steep decline.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
     // WATER
     { text: "21 of the world's 37 largest aquifers are being depleted faster than they can naturally replenish.", source: "https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015WR017349" },
     { text: "Agriculture accounts for around 70% of all freshwater withdrawals globally; livestock accounts for roughly 30% of that footprint while occupying 77% of agricultural land.", source: "https://www.fao.org/aquastat/en/" },
-    { text: "The Ogallala Aquifer; which irrigates 30% of all US groundwater-fed agriculture; took millions of years to fill and is being drained in decades.", source: "https://www.scientificamerican.com/article/ogallala-aquifer/" },
+    { text: "The Ogallala Aquifer (which irrigates 30% of all US groundwater-fed agriculture) took millions of years to fill and is being drained in decades.", source: "https://www.scientificamerican.com/article/ogallala-aquifer/" },
     // WILDLIFE
     { text: "Monitored wildlife populations have declined by an average of 73% since 1970.", source: "https://livingplanet.panda.org/" },
     { text: "Freshwater species populations have declined by 85% on average since 1970; the sharpest collapse of any habitat type on Earth.", source: "https://livingplanet.panda.org/" },
@@ -27,7 +27,7 @@
     { text: "The number of recorded climate disasters has increased fivefold over the past 50 years.", source: "https://public.wmo.int/en/media/press-release/wmo-atlas-of-mortality-and-economic-losses" },
     { text: "CO₂ levels in the atmosphere are now higher than at any point in at least 800,000 years.", source: "https://climate.nasa.gov/vital-signs/carbon-dioxide/" },
     // OCEANS
-    { text: "The 2023–2025 global coral bleaching event; the fourth ever recorded and the most severe in history; impacted 84% of the world's reefs across 82 countries and territories.", source: "https://coralreefwatch.noaa.gov/" },
+    { text: "The 2023–2025 global coral bleaching event (the fourth ever recorded and the most severe in history) impacted 84% of the world's reefs across 82 countries and territories.", source: "https://coralreefwatch.noaa.gov/" },
     { text: "During the first global bleaching event in 1998, 21% of reefs were affected. In 2025, it was 84%.", source: "https://coralreefwatch.noaa.gov/" },
     { text: "Around 8 million tonnes of plastic enter the world's oceans every year.", source: "https://www.science.org/doi/10.1126/science.1260352" },
     { text: "Only 9% of all plastic waste produced globally has ever been recycled.", source: "https://www.ecowatch.com/" },

@@ -58,7 +58,7 @@
   {
     "id": 9,
     "category": "agriculture",
-    "text": "Approximately 40% of invertebrate pollinator species; including bees and butterflies; are currently at risk of extinction.",
+    "text": "Approximately 40% of invertebrate pollinator species (including bees and butterflies) are currently at risk of extinction.",
     "source": "https://www.ipbes.net/assessment-reports/pollinators",
     "ref": "IPBES Pollinator Assessment 2016"
   },
@@ -86,7 +86,7 @@
   {
     "id": 13,
     "category": "water",
-    "text": "The Ogallala Aquifer; which irrigates 30% of all US groundwater-fed agriculture; took millions of years to fill and is being drained in decades.",
+    "text": "The Ogallala Aquifer (which irrigates 30% of all US groundwater-fed agriculture) took millions of years to fill and is being drained in decades.",
     "source": "https://www.scientificamerican.com/article/ogallala-aquifer/",
     "ref": "Scientific American / USGS 2023"
   },
@@ -135,7 +135,7 @@
   {
     "id": 20,
     "category": "oceans",
-    "text": "The 2023–2025 global coral bleaching event; the fourth ever recorded and the most severe in history; impacted 84% of the world's reefs across 82 countries and territories.",
+    "text": "The 2023–2025 global coral bleaching event (the fourth ever recorded and the most severe in history) impacted 84% of the world's reefs across 82 countries and territories.",
     "source": "https://coralreefwatch.noaa.gov/",
     "ref": "ICRI / NOAA Coral Reef Watch, April 2025"
   },
@@ -191,7 +191,7 @@
   {
     "id": 28,
     "category": "food",
-    "text": "72% of the world's staple crops; maize, wheat, soybeans, and rice; are grown in just 5 countries; a synchronized failure across all four is projected to become possible every 11 years by mid-century.",
+    "text": "72% of the world's staple crops (maize, wheat, soybeans, and rice) are grown in just 5 countries; a synchronized failure across all four is projected to become possible every 11 years by mid-century.",
     "source": "https://www.woodwellclimate.org/",
     "ref": "Woodwell Climate Research Center 2025"
   },
