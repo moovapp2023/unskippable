@@ -31,10 +31,6 @@
 
     /* ── NAV ── */
     nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 24px 40px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -42,26 +38,9 @@
       backdrop-filter: blur(12px);
       border-bottom: 1px solid transparent;
       transition: border-color 0.3s;
+      overflow: hidden;
     }
     nav.scrolled { border-color: var(--border); }
-
-    .nav-install {
-      font-size: 13px;
-      font-weight: bold;
-      color: var(--green);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: opacity 0.15s;
-    }
-    .nav-install:hover { opacity: 0.7; }
-
-    /* ── FULL-WIDTH WORDMARK ── */
-    .wordmark-section {
-      width: 100%;
-      overflow: hidden;
-      padding: 8px 0 0;
-      line-height: 1;
-    }
 
     #hero-wordmark {
       font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
@@ -74,8 +53,26 @@
       transform: scaleY(0.58);
       transform-origin: top left;
       line-height: 1;
+      padding-top: 6px;
       /* font-size set by JS */
     }
+
+    .nav-install {
+      position: absolute;
+      top: 50%;
+      right: 40px;
+      transform: translateY(-50%);
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: opacity 0.15s;
+      background: rgba(11,11,11,0.7);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .nav-install:hover { opacity: 0.7; }
 
     /* ── HERO CONTENT ── */
     .hero {
@@ -370,15 +367,11 @@
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- NAV with full-width wordmark -->
   <nav id="nav">
-    <a href="#install" class="nav-install">Add to Chrome — free →</a>
-  </nav>
-
-  <!-- FULL-WIDTH WORDMARK -->
-  <div class="wordmark-section">
     <span id="hero-wordmark">Unskippable</span>
-  </div>
+    <a href="#install" class="nav-install">Add to Chrome →</a>
+  </nav>
 
   <!-- HERO CONTENT -->
   <section class="hero">
@@ -468,12 +461,14 @@
   </footer>
 
   <script>
-    // ── Fit wordmark to exact viewport width ──
+    // ── Fit wordmark to exact nav width ──
     const wm = document.getElementById('hero-wordmark');
+    const navEl = document.getElementById('nav');
     function fitWordmark() {
       wm.style.fontSize = '100px';
-      const naturalWidth = wm.getBoundingClientRect().width;
-      wm.style.fontSize = (100 * window.innerWidth / naturalWidth) + 'px';
+      const naturalWidth = wm.scrollWidth;
+      const targetWidth = navEl.clientWidth;
+      wm.style.fontSize = (100 * targetWidth / naturalWidth) + 'px';
     }
     fitWordmark();
     window.addEventListener('resize', fitWordmark);
