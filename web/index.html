@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unskippable Climate</title>
+  <meta name="description" content="A climate fact in every email you send. Free Chrome extension for Gmail.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b0b0b;
+      --surface: #141414;
+      --border: #222;
+      --text: #f0f0f0;
+      --muted: #666;
+      --dim: #999;
+      --green: #4ade80;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 24px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,11,11,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-color: var(--border); }
+
+    .nav-install {
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: opacity 0.15s;
+    }
+    .nav-install:hover { opacity: 0.7; }
+
+    /* ── FULL-WIDTH WORDMARK ── */
+    .wordmark-section {
+      width: 100%;
+      overflow: hidden;
+      padding: 8px 0 0;
+      line-height: 1;
+    }
+
+    #hero-wordmark {
+      font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: block;
+      color: var(--text);
+      transform: scaleY(0.58);
+      transform-origin: top left;
+      line-height: 1;
+      /* font-size set by JS */
+    }
+
+    /* ── HERO CONTENT ── */
+    .hero {
+      padding: 52px 40px 72px;
+      max-width: 860px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(18px, 3vw, 26px);
+      color: var(--dim);
+      max-width: 520px;
+      margin-bottom: 40px;
+      line-height: 1.45;
+    }
+    .hero-tagline em { color: var(--text); font-style: normal; }
+
+    .btn-install {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: #0b0b0b;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      padding: 14px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .btn-install:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-install svg { flex-shrink: 0; }
+
+    .hero-sub {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── DEMO ── */
+    .demo {
+      padding: 60px 40px 80px;
+      max-width: 860px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 20px;
+    }
+
+    .email-mock {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 24px 60px rgba(0,0,0,0.6);
+      max-width: 600px;
+    }
+
+    .email-chrome {
+      background: #f1f3f4;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border-bottom: 1px solid #dadce0;
+    }
+    .chrome-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .chrome-dot:nth-child(1) { background: #ff5f57; }
+    .chrome-dot:nth-child(2) { background: #febc2e; }
+    .chrome-dot:nth-child(3) { background: #28c840; }
+
+    .email-header {
+      padding: 14px 20px 10px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .email-subject { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #202124; margin-bottom: 3px; }
+    .email-meta { font-family: Arial, sans-serif; font-size: 12px; color: #5f6368; }
+
+    .email-body {
+      padding: 18px 20px 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #202124;
+      line-height: 1.6;
+    }
+    .email-body p { margin-bottom: 10px; }
+
+    .uc-block {
+      margin-top: 14px;
+      padding-top: 11px;
+      border-top: 1px solid #e0e0e0;
+    }
+    .uc-wordmark-email {
+      font-family: 'Arial Black', Impact, sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      display: inline-block;
+      transform: scaleY(0.58);
+      transform-origin: bottom left;
+      color: #bbb;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .uc-fact { font-family: Arial, sans-serif; font-size: 12px; color: #555; }
+    .uc-fact a { color: #1a73e8; text-decoration: none; font-size: 11px; }
+
+    .demo-caption { margin-top: 14px; font-size: 12px; color: var(--muted); }
+
+    /* ── FACTS TICKER ── */
+    .ticker {
+      padding: 60px 40px 80px;
+      max-width: 860px;
+      border-top: 1px solid var(--border);
+    }
+
+    .ticker-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .ticker-fact {
+      font-size: clamp(15px, 2.5vw, 18px);
+      color: var(--text);
+      line-height: 1.5;
+      transition: opacity 0.4s;
+    }
+    .ticker-fact.fade { opacity: 0; }
+
+    .ticker-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .ticker-source { font-size: 11px; color: var(--muted); text-decoration: none; }
+    .ticker-source:hover { color: var(--dim); }
+
+    .ticker-nav { display: flex; gap: 8px; }
+    .ticker-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--dim);
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .ticker-btn:hover { border-color: var(--dim); color: var(--text); }
+    .ticker-count { font-size: 11px; color: var(--muted); align-self: center; }
+
+    /* ── FEEDBACK ── */
+    .feedback {
+      padding: 60px 40px 80px;
+      max-width: 860px;
+      border-top: 1px solid var(--border);
+    }
+
+    .feedback h2 {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .feedback-sub {
+      font-size: 14px;
+      color: var(--dim);
+      margin-bottom: 28px;
+    }
+
+    .feedback-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 560px;
+    }
+
+    .feedback-form textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 14px 16px;
+      resize: vertical;
+      min-height: 110px;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+    .feedback-form textarea::placeholder { color: var(--muted); }
+    .feedback-form textarea:focus { border-color: var(--dim); }
+
+    .feedback-row {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .feedback-form input[type="email"] {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      padding: 12px 16px;
+      transition: border-color 0.15s;
+      outline: none;
+      min-width: 0;
+    }
+    .feedback-form input[type="email"]::placeholder { color: var(--muted); }
+    .feedback-form input[type="email"]:focus { border-color: var(--dim); }
+
+    .btn-submit {
+      background: var(--green);
+      color: #0b0b0b;
+      border: none;
+      border-radius: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      padding: 12px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s;
+      flex-shrink: 0;
+    }
+    .btn-submit:hover { opacity: 0.85; }
+    .btn-submit:disabled { opacity: 0.4; cursor: default; }
+
+    .feedback-thanks {
+      font-size: 13px;
+      color: var(--green);
+      display: none;
+      padding-top: 4px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-wordmark {
+      font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      display: inline-block;
+      transform: scaleY(0.58);
+      transform-origin: bottom left;
+      line-height: 1;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--dim); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav, .hero, .demo, .ticker, .feedback, footer { padding-left: 20px; padding-right: 20px; }
+      .feedback-row { flex-direction: column; }
+      .btn-submit { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#install" class="nav-install">Add to Chrome — free →</a>
+  </nav>
+
+  <!-- FULL-WIDTH WORDMARK -->
+  <div class="wordmark-section">
+    <span id="hero-wordmark">Unskippable</span>
+  </div>
+
+  <!-- HERO CONTENT -->
+  <section class="hero">
+    <p class="hero-tagline">
+      A <em>climate fact</em> in every email you send.<br>
+      Free. Automatic. Unskippable.
+    </p>
+    <a href="#install" class="btn-install" id="install">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <circle cx="9" cy="9" r="8.5" stroke="#0b0b0b" stroke-opacity="0.3"/>
+        <path d="M9 5v5.5M9 10.5l-2-2M9 10.5l2-2" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5.5 13h7" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Add to Chrome — it's free
+    </a>
+    <p class="hero-sub">Gmail only &nbsp;·&nbsp; No account needed &nbsp;·&nbsp; 41 sourced facts</p>
+  </section>
+
+  <!-- DEMO -->
+  <section class="demo">
+    <div class="section-label">What it looks like</div>
+    <div class="email-mock">
+      <div class="email-chrome">
+        <div class="chrome-dot"></div>
+        <div class="chrome-dot"></div>
+        <div class="chrome-dot"></div>
+      </div>
+      <div class="email-header">
+        <div class="email-subject">Re: Quarterly targets</div>
+        <div class="email-meta">To: sarah@company.com</div>
+      </div>
+      <div class="email-body">
+        <p>Makes sense, let's sync Thursday. I'll send a calendar invite.</p>
+        <p>Talk soon,<br>Owen</p>
+        <div class="uc-block">
+          <div><span class="uc-wordmark-email">Unskippable</span></div>
+          <span class="uc-fact">
+            🌍 <span id="demo-text">The last decade (2014–2023) was the hottest ever recorded.</span>
+            <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">↗ source</a>
+          </span>
+        </div>
+      </div>
+    </div>
+    <p class="demo-caption">Appended automatically to every email. Recipients see it like any other signature.</p>
+  </section>
+
+  <!-- FACTS TICKER -->
+  <section class="ticker">
+    <div class="section-label">The facts</div>
+    <div class="ticker-inner">
+      <p class="ticker-fact" id="ticker-text"></p>
+      <div class="ticker-meta">
+        <a href="#" class="ticker-source" id="ticker-source" target="_blank">↗ source</a>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="ticker-count" id="ticker-count"></span>
+          <div class="ticker-nav">
+            <button class="ticker-btn" id="ticker-prev">‹</button>
+            <button class="ticker-btn" id="ticker-next">›</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section class="feedback">
+    <h2>Tell us what you think</h2>
+    <p class="feedback-sub">Love it, hate it, have a suggestion — we read everything.</p>
+    <!-- Formspree: replace YOUR_FORM_ID after creating form at formspree.io -->
+    <form class="feedback-form" id="feedback-form">
+      <textarea name="message" placeholder="What's on your mind?"></textarea>
+      <div class="feedback-row">
+        <input type="email" name="email" placeholder="Your email (optional)">
+        <button type="submit" class="btn-submit" id="submit-btn">Send</button>
+      </div>
+      <p class="feedback-thanks" id="feedback-thanks">Thanks — we got it. ✓</p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-wordmark">Unskippable</span>
+    <div class="footer-links">
+      <a href="https://chrome.google.com/webstore" target="_blank">Chrome Web Store</a>
+      <a href="https://github.com" target="_blank">GitHub</a>
+    </div>
+  </footer>
+
+  <script>
+    // ── Fit wordmark to exact viewport width ──
+    const wm = document.getElementById('hero-wordmark');
+    function fitWordmark() {
+      wm.style.fontSize = '100px';
+      const naturalWidth = wm.getBoundingClientRect().width;
+      wm.style.fontSize = (100 * window.innerWidth / naturalWidth) + 'px';
+    }
+    fitWordmark();
+    window.addEventListener('resize', fitWordmark);
+
+    // ── Nav border on scroll ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // ── Facts ──
+    const FACTS = [
+      { text: "Since 1990, the world has lost 420 million hectares of forest — an area larger than the European Union.", source: "https://www.fao.org/state-of-forests/en/" },
+      { text: "Tropical forests once covered 12% of Earth's land. Today they cover around 5%.", source: "https://www.globalforestwatch.org" },
+      { text: "The world loses approximately 10 million hectares of forest per year — down from 16 million in 1990, but from a much smaller remaining base.", source: "https://www.fao.org/state-of-forests/en/" },
+      { text: "Half of all habitable land on Earth is used for agriculture — and 77% of that is dedicated to livestock.", source: "https://ourworldindata.org/global-land-for-agriculture" },
+      { text: "77% of agricultural land is used for livestock — yet animal products provide only 18% of the world's calories.", source: "https://science.sciencemag.org/content/360/6392/987" },
+      { text: "Agricultural expansion drives up to 90% of global tropical deforestation.", source: "https://www.fao.org/sustainability/news/detail/en/c/1274219/" },
+      { text: "Three-quarters of the world's crop species depend on pollinators — insects underpin 35% of global food production, including most fruits, nuts, and vegetables.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
+      { text: "Approximately 40% of invertebrate pollinator species — including bees and butterflies — are currently at risk of extinction.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
+      { text: "21 of the world's 37 largest aquifers are being depleted faster than they can naturally replenish.", source: "https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015WR017349" },
+      { text: "The Ogallala Aquifer — which irrigates 30% of all US groundwater-fed agriculture — took millions of years to fill and is being drained in decades.", source: "https://www.scientificamerican.com/article/ogallala-aquifer/" },
+      { text: "Monitored wildlife populations have declined by an average of 73% since 1970.", source: "https://livingplanet.panda.org/" },
+      { text: "Freshwater species populations have declined by 85% on average since 1970 — the sharpest collapse of any habitat type on Earth.", source: "https://livingplanet.panda.org/" },
+      { text: "The last decade (2014–2023) was the hottest ever recorded.", source: "https://climate.nasa.gov/vital-signs/global-temperature/" },
+      { text: "Global sea levels have risen 21–24cm since 1880, with the rate of rise doubling since 2006.", source: "https://climate.nasa.gov/vital-signs/sea-level/" },
+      { text: "CO₂ levels in the atmosphere are now higher than at any point in at least 800,000 years.", source: "https://climate.nasa.gov/vital-signs/carbon-dioxide/" },
+      { text: "The 2023–2025 global coral bleaching event — the fourth ever recorded and the most severe in history — impacted 84% of the world's reefs across 82 countries.", source: "https://coralreefwatch.noaa.gov/" },
+      { text: "Around 8 million tonnes of plastic enter the world's oceans every year.", source: "https://www.science.org/doi/10.1126/science.1260352" },
+      { text: "Only 9% of all plastic waste produced globally has ever been recycled.", source: "https://www.ecowatch.com/" },
+      { text: "Every additional degree Celsius of warming reduces global food production capacity by approximately 120 calories per person per day.", source: "https://www.nature.com/" },
+      { text: "72% of the world's staple crops are grown in just 5 countries — a synchronized failure could become possible every 11 years by mid-century.", source: "https://www.woodwellclimate.org/" },
+      { text: "Microplastics have now been detected in human blood, lungs, placentas, and breast milk.", source: "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822" },
+      { text: "The cost of solar power has fallen by 90% in the last decade — the fastest cost decline of any energy source in history.", source: "https://www.iea.org/reports/world-energy-outlook-2023" },
+      { text: "The ozone layer is on track to fully recover by 2066, thanks to the 1987 Montreal Protocol — the most successful international environmental agreement ever reached.", source: "https://ozone.unep.org/science/assessment/sap" },
+      { text: "2025 became the first full calendar year on record to exceed 1.5°C of warming above pre-industrial levels.", source: "https://climate.copernicus.eu/" },
+      { text: "The International Court of Justice declared in 2025 that nations have legally binding obligations to prevent climate harm.", source: "https://www.icj-cij.org/" },
+      { text: "For the first time, scientists formally attributed specific heatwave deaths to named fossil fuel companies — opening the door to direct legal liability.", source: "https://www.worldweatherattribution.org/" },
+      { text: "The UN High Seas Treaty entered ratification in 2025 — the first legal framework ever to govern the high seas, which cover nearly half the planet.", source: "https://www.un.org/bbnjagreement" },
+    ];
+
+    let tickerIndex = 0;
+    const tickerText = document.getElementById('ticker-text');
+    const tickerSource = document.getElementById('ticker-source');
+    const tickerCount = document.getElementById('ticker-count');
+
+    function showFact(i) {
+      tickerText.classList.add('fade');
+      setTimeout(() => {
+        const f = FACTS[i];
+        tickerText.textContent = '🌍 ' + f.text;
+        tickerSource.href = f.source;
+        tickerCount.textContent = (i + 1) + ' / ' + FACTS.length;
+        tickerText.classList.remove('fade');
+      }, 380);
+    }
+
+    document.getElementById('ticker-next').addEventListener('click', () => {
+      tickerIndex = (tickerIndex + 1) % FACTS.length;
+      showFact(tickerIndex);
+    });
+    document.getElementById('ticker-prev').addEventListener('click', () => {
+      tickerIndex = (tickerIndex - 1 + FACTS.length) % FACTS.length;
+      showFact(tickerIndex);
+    });
+
+    showFact(0);
+    setInterval(() => {
+      tickerIndex = (tickerIndex + 1) % FACTS.length;
+      showFact(tickerIndex);
+    }, 6000);
+
+    // ── Demo fact cycle ──
+    const demoText = document.getElementById('demo-text');
+    const demoFacts = [
+      "The last decade (2014–2023) was the hottest ever recorded.",
+      "77% of agricultural land is used for livestock — yet animal products provide only 18% of calories.",
+      "Monitored wildlife populations have declined by an average of 73% since 1970.",
+      "Around 8 million tonnes of plastic enter the world's oceans every year.",
+    ];
+    let demoIdx = 0;
+    demoText.style.transition = 'opacity 0.35s';
+    setInterval(() => {
+      demoIdx = (demoIdx + 1) % demoFacts.length;
+      demoText.style.opacity = 0;
+      setTimeout(() => { demoText.textContent = demoFacts[demoIdx]; demoText.style.opacity = 1; }, 350);
+    }, 5000);
+
+    // ── Feedback form ──
+    // Uses Formspree — create a free form at formspree.io and replace the URL below
+    const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+
+    document.getElementById('feedback-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submit-btn');
+      const thanks = document.getElementById('feedback-thanks');
+      const form = e.target;
+      const message = form.message.value.trim();
+      if (!message) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, email: form.email.value }),
+        });
+
+        if (res.ok) {
+          form.message.value = '';
+          form.email.value = '';
+          thanks.style.display = 'block';
+          btn.style.display = 'none';
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Send';
+          alert('Something went wrong. Try again.');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send';
+      }
+    });
+  </script>
+</body>
+</html>
