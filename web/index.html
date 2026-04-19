@@ -9,13 +9,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0b0b0b;
-      --surface: #141414;
-      --border: #222;
-      --text: #f0f0f0;
-      --muted: #666;
-      --dim: #999;
-      --green: #4ade80;
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --border: #e0e0e0;
+      --text: #111111;
+      --muted: #aaa;
+      --dim: #555;
+      --green: #16a34a;
     }
 
     html { scroll-behavior: smooth; }
@@ -72,7 +72,7 @@
       align-items: center;
       gap: 10px;
       background: var(--green);
-      color: #0b0b0b;
+      color: #ffffff;
       font-size: 14px;
       font-weight: bold;
       letter-spacing: 0.04em;
@@ -207,7 +207,7 @@
     .feedback-form textarea {
       width: 100%;
       background: var(--surface);
-      border: 1px solid #333;
+      border: 1px solid var(--border);
       border-radius: 10px;
       color: var(--text);
       font-family: Arial, sans-serif;
@@ -227,7 +227,7 @@
     .feedback-form input[type="email"] {
       flex: 1;
       background: var(--surface);
-      border: 1px solid #333;
+      border: 1px solid var(--border);
       border-radius: 10px;
       color: var(--text);
       font-family: Arial, sans-serif;
@@ -242,7 +242,7 @@
 
     .btn-submit {
       background: var(--green);
-      color: #0b0b0b;
+      color: #ffffff;
       border: none;
       border-radius: 10px;
       font-family: Arial, sans-serif;
