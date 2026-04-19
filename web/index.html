@@ -307,7 +307,7 @@
           <path d="M9 5v5.5M9 10.5l-2-2M9 10.5l2-2" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           <path d="M5.5 13h7" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        Add to Chrome — it's free
+        Add to Chrome; it's free
       </a>
       <p class="hero-sub">Gmail only &nbsp;·&nbsp; No account needed &nbsp;·&nbsp; 41 sourced facts</p>
     </section>
@@ -411,7 +411,7 @@
           <input type="email" name="email" placeholder="Your email (optional)">
           <button type="submit" class="btn-submit" id="submit-btn">Send</button>
         </div>
-        <p class="feedback-thanks" id="feedback-thanks">Thanks — we got it. ✓</p>
+        <p class="feedback-thanks" id="feedback-thanks">Thanks; we got it. ✓</p>
       </form>
     </div>
   </section>
@@ -447,7 +447,7 @@
     const placeholders = {
       suggest: "Got a well-sourced climate fact we should add? Paste it here along with the source link.",
       correct: "Which fact needs correcting, and what's wrong with it? Include a better source if you have one.",
-      other:   "Love it, hate it, have a thought — we read everything.",
+      other:   "Love it, hate it, have a thought; we read everything.",
     };
     const typeButtons = document.querySelectorAll('.type-btn');
     const msgArea = document.getElementById('feedback-msg');
@@ -464,31 +464,31 @@
 
     // ── Facts ──
     const FACTS = [
-      { text: "Since 1990, the world has lost 420 million hectares of forest — an area larger than the European Union.", source: "https://www.fao.org/state-of-forests/en/" },
+      { text: "Since 1990, the world has lost 420 million hectares of forest; an area larger than the European Union.", source: "https://www.fao.org/state-of-forests/en/" },
       { text: "Tropical forests once covered 12% of Earth's land. Today they cover around 5%.", source: "https://www.globalforestwatch.org" },
-      { text: "Half of all habitable land on Earth is used for agriculture — and 77% of that is dedicated to livestock.", source: "https://ourworldindata.org/global-land-for-agriculture" },
-      { text: "77% of agricultural land is used for livestock — yet animal products provide only 18% of the world's calories.", source: "https://science.sciencemag.org/content/360/6392/987" },
-      { text: "Three-quarters of the world's crop species depend on pollinators — insects underpin 35% of global food production.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
+      { text: "Half of all habitable land on Earth is used for agriculture; and 77% of that is dedicated to livestock.", source: "https://ourworldindata.org/global-land-for-agriculture" },
+      { text: "77% of agricultural land is used for livestock; yet animal products provide only 18% of the world's calories.", source: "https://science.sciencemag.org/content/360/6392/987" },
+      { text: "Three-quarters of the world's crop species depend on pollinators; insects underpin 35% of global food production.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
       { text: "Approximately 40% of invertebrate pollinator species are currently at risk of extinction.", source: "https://www.ipbes.net/assessment-reports/pollinators" },
       { text: "21 of the world's 37 largest aquifers are being depleted faster than they can naturally replenish.", source: "https://agupubs.onlinelibrary.wiley.com/doi/10.1002/2015WR017349" },
-      { text: "The Ogallala Aquifer — which irrigates 30% of all US groundwater-fed agriculture — took millions of years to fill and is being drained in decades.", source: "https://www.scientificamerican.com/article/ogallala-aquifer/" },
+      { text: "The Ogallala Aquifer; which irrigates 30% of all US groundwater-fed agriculture; took millions of years to fill and is being drained in decades.", source: "https://www.scientificamerican.com/article/ogallala-aquifer/" },
       { text: "Monitored wildlife populations have declined by an average of 73% since 1970.", source: "https://livingplanet.panda.org/" },
-      { text: "Freshwater species populations have declined by 85% on average since 1970 — the sharpest collapse of any habitat type on Earth.", source: "https://livingplanet.panda.org/" },
+      { text: "Freshwater species populations have declined by 85% on average since 1970; the sharpest collapse of any habitat type on Earth.", source: "https://livingplanet.panda.org/" },
       { text: "The last decade (2014–2023) was the hottest ever recorded.", source: "https://climate.nasa.gov/vital-signs/global-temperature/" },
       { text: "Global sea levels have risen 21–24cm since 1880, with the rate of rise doubling since 2006.", source: "https://climate.nasa.gov/vital-signs/sea-level/" },
       { text: "CO₂ levels in the atmosphere are now higher than at any point in at least 800,000 years.", source: "https://climate.nasa.gov/vital-signs/carbon-dioxide/" },
-      { text: "The 2023–2025 coral bleaching event impacted 84% of the world's reefs across 82 countries — the most severe ever recorded.", source: "https://coralreefwatch.noaa.gov/" },
+      { text: "The 2023–2025 coral bleaching event impacted 84% of the world's reefs across 82 countries; the most severe ever recorded.", source: "https://coralreefwatch.noaa.gov/" },
       { text: "Around 8 million tonnes of plastic enter the world's oceans every year.", source: "https://www.science.org/doi/10.1126/science.1260352" },
       { text: "Only 9% of all plastic waste produced globally has ever been recycled.", source: "https://www.ecowatch.com/" },
       { text: "Every additional degree Celsius of warming reduces global food production capacity by ~120 calories per person per day.", source: "https://www.nature.com/" },
-      { text: "72% of the world's staple crops are grown in just 5 countries — a synchronized failure could become possible every 11 years by mid-century.", source: "https://www.woodwellclimate.org/" },
+      { text: "72% of the world's staple crops are grown in just 5 countries; a synchronized failure could become possible every 11 years by mid-century.", source: "https://www.woodwellclimate.org/" },
       { text: "Microplastics have been detected in human blood, lungs, placentas, and breast milk.", source: "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822" },
-      { text: "The cost of solar power has fallen by 90% in the last decade — the fastest cost decline of any energy source in history.", source: "https://www.iea.org/reports/world-energy-outlook-2023" },
-      { text: "The ozone layer is on track to fully recover by 2066 — the most successful international environmental agreement ever reached.", source: "https://ozone.unep.org/science/assessment/sap" },
+      { text: "The cost of solar power has fallen by 90% in the last decade; the fastest cost decline of any energy source in history.", source: "https://www.iea.org/reports/world-energy-outlook-2023" },
+      { text: "The ozone layer is on track to fully recover by 2066; the most successful international environmental agreement ever reached.", source: "https://ozone.unep.org/science/assessment/sap" },
       { text: "2025 became the first full calendar year on record to exceed 1.5°C of warming above pre-industrial levels.", source: "https://climate.copernicus.eu/" },
       { text: "The ICJ declared in 2025 that nations have legally binding obligations to prevent climate harm.", source: "https://www.icj-cij.org/" },
       { text: "For the first time, scientists formally attributed specific heatwave deaths to named fossil fuel companies.", source: "https://www.worldweatherattribution.org/" },
-      { text: "The UN High Seas Treaty entered ratification in 2025 — the first legal framework ever to govern the high seas.", source: "https://www.un.org/bbnjagreement" },
+      { text: "The UN High Seas Treaty entered ratification in 2025; the first legal framework ever to govern the high seas.", source: "https://www.un.org/bbnjagreement" },
     ];
 
     let tickerIndex = 0;
@@ -515,7 +515,7 @@
     const demoText = document.getElementById('demo-text');
     const demoFacts = [
       "The last decade (2014–2023) was the hottest ever recorded.",
-      "77% of agricultural land is used for livestock — yet it provides only 18% of calories.",
+      "77% of agricultural land is used for livestock; yet it provides only 18% of calories.",
       "Monitored wildlife populations have declined by an average of 73% since 1970.",
       "Around 8 million tonnes of plastic enter the world's oceans every year.",
     ];

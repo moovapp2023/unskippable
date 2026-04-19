@@ -2,7 +2,7 @@
   {
     "id": 1,
     "category": "forests",
-    "text": "Since 1990, the world has lost 420 million hectares of forest — an area larger than the European Union.",
+    "text": "Since 1990, the world has lost 420 million hectares of forest; an area larger than the European Union.",
     "source": "https://www.fao.org/state-of-forests/en/",
     "ref": "FAO Global Forest Resources Assessment 2020"
   },
@@ -16,21 +16,21 @@
   {
     "id": 3,
     "category": "forests",
-    "text": "The world loses approximately 10 million hectares of forest per year — down from 16 million in 1990, but from a much smaller remaining base.",
+    "text": "The world loses approximately 10 million hectares of forest per year; down from 16 million in 1990, but from a much smaller remaining base.",
     "source": "https://www.fao.org/state-of-forests/en/",
     "ref": "FAO Global Forest Resources Assessment 2020"
   },
   {
     "id": 4,
     "category": "agriculture",
-    "text": "Half of all habitable land on Earth is used for agriculture — and 77% of that agricultural land is dedicated to livestock.",
+    "text": "Half of all habitable land on Earth is used for agriculture; and 77% of that agricultural land is dedicated to livestock.",
     "source": "https://ourworldindata.org/global-land-for-agriculture",
     "ref": "Our World in Data / FAO 2023"
   },
   {
     "id": 5,
     "category": "agriculture",
-    "text": "77% of agricultural land is used for livestock — yet animal products provide only 18% of the world's calories.",
+    "text": "77% of agricultural land is used for livestock; yet animal products provide only 18% of the world's calories.",
     "source": "https://science.sciencemag.org/content/360/6392/987",
     "ref": "Poore & Nemecek, Science 2018"
   },
@@ -51,21 +51,21 @@
   {
     "id": 8,
     "category": "agriculture",
-    "text": "Three-quarters of the world's crop species depend on pollinators — insects underpin 35% of global food production by volume, including most fruits, nuts, and vegetables.",
+    "text": "Three-quarters of the world's crop species depend on pollinators; insects underpin 35% of global food production by volume, including most fruits, nuts, and vegetables.",
     "source": "https://www.ipbes.net/assessment-reports/pollinators",
     "ref": "FAO; Klein et al. 2007; IPBES Pollinator Assessment 2016"
   },
   {
     "id": 9,
     "category": "agriculture",
-    "text": "Approximately 40% of invertebrate pollinator species — including bees and butterflies — are currently at risk of extinction.",
+    "text": "Approximately 40% of invertebrate pollinator species; including bees and butterflies; are currently at risk of extinction.",
     "source": "https://www.ipbes.net/assessment-reports/pollinators",
     "ref": "IPBES Pollinator Assessment 2016"
   },
   {
     "id": 10,
     "category": "agriculture",
-    "text": "The global economic value of pollination services is estimated at $235–577 billion annually — provided almost entirely by wild and managed insects now in steep decline.",
+    "text": "The global economic value of pollination services is estimated at $235–577 billion annually; provided almost entirely by wild and managed insects now in steep decline.",
     "source": "https://www.ipbes.net/assessment-reports/pollinators",
     "ref": "IPBES 2016; World Economic Forum"
   },
@@ -79,14 +79,14 @@
   {
     "id": 12,
     "category": "water",
-    "text": "Agriculture accounts for around 70% of all freshwater withdrawals globally — livestock alone accounts for roughly 30% of agriculture's total water footprint, while occupying 77% of its land.",
+    "text": "Agriculture accounts for around 70% of all freshwater withdrawals globally; livestock alone accounts for roughly 30% of agriculture's total water footprint, while occupying 77% of its land.",
     "source": "https://www.fao.org/aquastat/en/",
     "ref": "Mekonnen & Hoekstra 2012; FAO AQUASTAT"
   },
   {
     "id": 13,
     "category": "water",
-    "text": "The Ogallala Aquifer — which irrigates 30% of all US groundwater-fed agriculture — took millions of years to fill and is being drained in decades.",
+    "text": "The Ogallala Aquifer; which irrigates 30% of all US groundwater-fed agriculture; took millions of years to fill and is being drained in decades.",
     "source": "https://www.scientificamerican.com/article/ogallala-aquifer/",
     "ref": "Scientific American / USGS 2023"
   },
@@ -100,7 +100,7 @@
   {
     "id": 15,
     "category": "wildlife",
-    "text": "Freshwater species populations have declined by 85% on average since 1970 — the sharpest collapse of any habitat type on Earth.",
+    "text": "Freshwater species populations have declined by 85% on average since 1970; the sharpest collapse of any habitat type on Earth.",
     "source": "https://livingplanet.panda.org/",
     "ref": "WWF Living Planet Report 2024"
   },
@@ -135,7 +135,7 @@
   {
     "id": 20,
     "category": "oceans",
-    "text": "The 2023–2025 global coral bleaching event — the fourth ever recorded and the most severe in history — impacted 84% of the world's reefs across 82 countries and territories.",
+    "text": "The 2023–2025 global coral bleaching event; the fourth ever recorded and the most severe in history; impacted 84% of the world's reefs across 82 countries and territories.",
     "source": "https://coralreefwatch.noaa.gov/",
     "ref": "ICRI / NOAA Coral Reef Watch, April 2025"
   },
@@ -163,14 +163,14 @@
   {
     "id": 24,
     "category": "oceans",
-    "text": "In the United States, the plastic recycling rate is just 5% — despite decades of consumer recycling campaigns.",
+    "text": "In the United States, the plastic recycling rate is just 5%; despite decades of consumer recycling campaigns.",
     "source": "https://www.ecowatch.com/",
     "ref": "EcoWatch 2025"
   },
   {
     "id": 25,
     "category": "food",
-    "text": "The world needs to produce roughly 60% more food by 2050 to feed a projected population of 9.6 billion — yet climate change is simultaneously reducing our capacity to do so.",
+    "text": "The world needs to produce roughly 60% more food by 2050 to feed a projected population of 9.6 billion; yet climate change is simultaneously reducing our capacity to do so.",
     "source": "https://www.nature.com/",
     "ref": "Climate Impact Lab / Stanford & Rutgers, Nature 2025"
   },
@@ -184,14 +184,14 @@
   {
     "id": 27,
     "category": "food",
-    "text": "Climate change is projected to reduce global staple crop yields by 8% by 2050 regardless of future emissions — and by 24% by 2100 under a high-emissions scenario.",
+    "text": "Climate change is projected to reduce global staple crop yields by 8% by 2050 regardless of future emissions; and by 24% by 2100 under a high-emissions scenario.",
     "source": "https://www.nature.com/",
     "ref": "Hultgren et al., Nature 2025"
   },
   {
     "id": 28,
     "category": "food",
-    "text": "72% of the world's staple crops — maize, wheat, soybeans, and rice — are grown in just 5 countries; a synchronized failure across all four is projected to become possible every 11 years by mid-century.",
+    "text": "72% of the world's staple crops; maize, wheat, soybeans, and rice; are grown in just 5 countries; a synchronized failure across all four is projected to become possible every 11 years by mid-century.",
     "source": "https://www.woodwellclimate.org/",
     "ref": "Woodwell Climate Research Center 2025"
   },
@@ -205,28 +205,28 @@
   {
     "id": 30,
     "category": "health",
-    "text": "A 2024 study found microplastic particles in arterial plaque — patients with higher concentrations had a significantly elevated risk of heart attack and stroke.",
+    "text": "A 2024 study found microplastic particles in arterial plaque; patients with higher concentrations had a significantly elevated risk of heart attack and stroke.",
     "source": "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822",
     "ref": "Marfella et al., New England Journal of Medicine 2024"
   },
   {
     "id": 31,
     "category": "progress",
-    "text": "The cost of solar power has fallen by 90% in the last decade — the fastest cost decline of any energy source in history.",
+    "text": "The cost of solar power has fallen by 90% in the last decade; the fastest cost decline of any energy source in history.",
     "source": "https://www.iea.org/reports/world-energy-outlook-2023",
     "ref": "IEA World Energy Outlook 2023"
   },
   {
     "id": 32,
     "category": "progress",
-    "text": "The ozone layer is on track to fully recover by 2066, thanks to the 1987 Montreal Protocol — the most successful international environmental agreement ever reached.",
+    "text": "The ozone layer is on track to fully recover by 2066, thanks to the 1987 Montreal Protocol; the most successful international environmental agreement ever reached.",
     "source": "https://ozone.unep.org/science/assessment/sap",
     "ref": "UNEP Scientific Assessment Panel 2022"
   },
   {
     "id": 33,
     "category": "progress",
-    "text": "Global renewable energy capacity grew by 50% in 2023 — the fastest rate in 20 years.",
+    "text": "Global renewable energy capacity grew by 50% in 2023; the fastest rate in 20 years.",
     "source": "https://www.iea.org/reports/renewables-2023",
     "ref": "IEA Renewables 2023"
   },
@@ -240,14 +240,14 @@
   {
     "id": 35,
     "category": "2025",
-    "text": "2025 became the first full calendar year on record to exceed 1.5°C of warming above pre-industrial levels — the threshold set by the Paris Agreement.",
+    "text": "2025 became the first full calendar year on record to exceed 1.5°C of warming above pre-industrial levels; the threshold set by the Paris Agreement.",
     "source": "https://climate.copernicus.eu/",
     "ref": "Copernicus Climate Change Service 2025"
   },
   {
     "id": 36,
     "category": "2025",
-    "text": "The International Court of Justice declared in 2025 that nations have legally binding obligations to prevent climate harm — a landmark shift in international climate law.",
+    "text": "The International Court of Justice declared in 2025 that nations have legally binding obligations to prevent climate harm; a landmark shift in international climate law.",
     "source": "https://www.icj-cij.org/",
     "ref": "ICJ Advisory Opinion 2025"
   },
@@ -261,28 +261,28 @@
   {
     "id": 38,
     "category": "2025",
-    "text": "For the first time, scientists formally attributed specific heatwave deaths to named fossil fuel companies — opening the door to direct legal liability.",
+    "text": "For the first time, scientists formally attributed specific heatwave deaths to named fossil fuel companies; opening the door to direct legal liability.",
     "source": "https://www.worldweatherattribution.org/",
     "ref": "World Weather Attribution / Climate Attribution Science 2025"
   },
   {
     "id": 39,
     "category": "2025",
-    "text": "The UN High Seas Treaty entered ratification in 2025, aiming to protect 30% of international ocean waters by 2030 — the first legal framework ever to govern the high seas, which cover nearly half the planet.",
+    "text": "The UN High Seas Treaty entered ratification in 2025, aiming to protect 30% of international ocean waters by 2030; the first legal framework ever to govern the high seas, which cover nearly half the planet.",
     "source": "https://www.un.org/bbnjagreement",
     "ref": "United Nations BBNJ Agreement 2025"
   },
   {
     "id": 40,
     "category": "2025",
-    "text": "Green sea turtle nesting populations rebounded significantly in 2025 — a rare conservation success story driven by decades of international protection efforts.",
+    "text": "Green sea turtle nesting populations rebounded significantly in 2025; a rare conservation success story driven by decades of international protection efforts.",
     "source": "https://earth.org/",
     "ref": "Earth.Org 2025"
   },
   {
     "id": 41,
     "category": "health",
-    "text": "Atmospheric CO₂ concentrations are projected to reach levels that measurably impair human cognitive function within 50 years — levels already regularly exceeded in poorly ventilated buildings today.",
+    "text": "Atmospheric CO₂ concentrations are projected to reach levels that measurably impair human cognitive function within 50 years; levels already regularly exceeded in poorly ventilated buildings today.",
     "source": "https://link.springer.com/article/10.1007/s11869-026-01918-5",
     "ref": "Air Quality, Atmosphere & Health 2026"
   }
