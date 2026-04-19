@@ -433,7 +433,10 @@
       wms[0].style.display = 'inline-block';
       const naturalWidth = wms[0].getBoundingClientRect().width;
       wms[0].style.display = 'block';
-      const fontSize = 100 * document.documentElement.clientWidth / naturalWidth;
+      // Subtract the trailing letter-spacing (0.28em × 100px) so the last
+      // character's right edge reaches the viewport edge, not the spacing after it
+      const contentWidth = naturalWidth - (0.28 * 100);
+      const fontSize = 100 * document.documentElement.clientWidth / contentWidth;
       const compensation = -(fontSize * 0.42);
       wms.forEach(wm => {
         wm.style.fontSize = fontSize + 'px';
