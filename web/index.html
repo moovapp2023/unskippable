@@ -435,16 +435,23 @@
     // ── Fit wordmarks to exact page width ──
     const wms = document.querySelectorAll('.wm');
     function fitWordmarks() {
+      // Measure as inline-block so we get text width, not container width
       wms[0].style.fontSize = '100px';
-      wms[0].style.marginBottom = '0';
-      const naturalWidth = wms[0].scrollWidth;
+      wms[0].style.display = 'inline-block';
+      const naturalWidth = wms[0].getBoundingClientRect().width;
+      wms[0].style.display = 'block';
+
       const fontSize = 100 * document.documentElement.clientWidth / naturalWidth;
-      const compensation = -(fontSize * 0.42); // pull up extra layout space from scaleY(0.58)
+      const compensation = -(fontSize * 0.42); // collapse extra layout space from scaleY(0.58)
 
       wms.forEach(wm => {
         wm.style.fontSize = fontSize + 'px';
         wm.style.marginBottom = compensation + 'px';
       });
+
+      // Align feedback panel to start below the hero
+      const hero = document.querySelector('.hero');
+      document.querySelector('.content-right').style.paddingTop = hero.offsetHeight + 'px';
     }
     fitWordmarks();
     window.addEventListener('resize', fitWordmarks);
