@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 220px;
+      padding: 18px 16px 16px;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #333;
+    }
+
+    .wordmark {
+      font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      display: inline-block;
+      transform: scaleY(0.58);
+      transform-origin: bottom left;
+      color: #333;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 16px;
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #eee;
+      margin-bottom: 14px;
+    }
+
+    .label {
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .option {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 6px 8px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      background: #fafafa;
+    }
+
+    .option:hover {
+      border-color: #aaa;
+      background: #f4f4f4;
+    }
+
+    .option.active {
+      border-color: #1a73e8;
+      background: #f0f6ff;
+    }
+
+    .option-icon {
+      width: 44px;
+      height: 32px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      gap: 2px;
+      padding: 3px;
+    }
+
+    .option-icon .line {
+      height: 3px;
+      border-radius: 2px;
+      background: #ccc;
+    }
+
+    .option-icon .line.highlight {
+      background: #1a73e8;
+    }
+
+    .option-icon .line.short { width: 60%; }
+
+    .option-label {
+      font-size: 10px;
+      color: #666;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+
+    .option.active .option-label {
+      color: #1a73e8;
+    }
+  </style>
+</head>
+<body>
+  <div class="wordmark">Unskippable</div>
+  <p class="tagline">A climate fact in every email you send.</p>
+  <hr class="divider">
+  <div class="label">Fact position</div>
+  <div class="options">
+
+    <div class="option" id="opt-top" data-value="top">
+      <div class="option-icon">
+        <div class="line highlight"></div>
+        <div class="line short highlight"></div>
+        <div class="line"></div>
+        <div class="line short"></div>
+        <div class="line"></div>
+      </div>
+      <div class="option-label">Top</div>
+    </div>
+
+    <div class="option" id="opt-bottom" data-value="bottom">
+      <div class="option-icon">
+        <div class="line"></div>
+        <div class="line short"></div>
+        <div class="line"></div>
+        <div class="line highlight"></div>
+        <div class="line short highlight"></div>
+      </div>
+      <div class="option-label">Bottom</div>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
