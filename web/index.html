@@ -34,6 +34,7 @@
     .wordmarks-stack {
       width: 100%;
       overflow: hidden;
+      padding-top: 10px;
     }
     .wm {
       font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
@@ -455,16 +456,12 @@
       // Subtract trailing letter-spacing so last character reaches the edge
       const contentWidth = naturalWidth - (0.28 * BASE_SIZE);
       const scaleX = document.documentElement.clientWidth / contentWidth;
-      // Each wm's layout box is BASE_SIZE tall; scaleY(0.58) visually shrinks
-      // it to BASE_SIZE*0.58, leaving BASE_SIZE*0.42 of empty space below.
-      // Negative marginBottom pulls the next sibling up to close that gap.
-      const gap = -(BASE_SIZE * 0.42);
+      const compensation = -(BASE_SIZE * 0.42);
 
-      wms.forEach((wm, i) => {
+      wms.forEach(wm => {
         wm.style.fontSize = BASE_SIZE + 'px';
         wm.style.transform = `scaleX(${scaleX}) scaleY(0.58)`;
-        // Last wordmark: only close its own gap, don't pull the hero up
-        wm.style.marginBottom = gap + 'px';
+        wm.style.marginBottom = compensation + 'px';
       });
     }
     fitWordmarks();
