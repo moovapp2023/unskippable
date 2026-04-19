@@ -23,7 +23,7 @@
   {
     "id": 4,
     "category": "agriculture",
-    "text": "Half of all habitable land on Earth is used for agriculture; and 77% of that agricultural land is dedicated to livestock.",
+    "text": "Half of all habitable land on Earth is used for agriculture; 77% of that agricultural land is dedicated to livestock.",
     "source": "https://ourworldindata.org/global-land-for-agriculture",
     "ref": "Our World in Data / FAO 2023"
   },
@@ -184,7 +184,7 @@
   {
     "id": 27,
     "category": "food",
-    "text": "Climate change is projected to reduce global staple crop yields by 8% by 2050 regardless of future emissions; and by 24% by 2100 under a high-emissions scenario.",
+    "text": "Climate change is projected to reduce global staple crop yields by 8% by 2050 regardless of future emissions; by 24% by 2100 under a high-emissions scenario.",
     "source": "https://www.nature.com/",
     "ref": "Hultgren et al., Nature 2025"
   },

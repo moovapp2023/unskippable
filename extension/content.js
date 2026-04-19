@@ -7,7 +7,7 @@
     { text: "Tropical forests once covered 12% of Earth's land. Today they cover around 5%.", source: "https://www.globalforestwatch.org" },
     { text: "The world loses approximately 10 million hectares of forest per year; down from 16 million in 1990, but from a much smaller remaining base.", source: "https://www.fao.org/state-of-forests/en/" },
     // AGRICULTURE
-    { text: "Half of all habitable land on Earth is used for agriculture; and 77% of that agricultural land is dedicated to livestock.", source: "https://ourworldindata.org/global-land-for-agriculture" },
+    { text: "Half of all habitable land on Earth is used for agriculture; 77% of that agricultural land is dedicated to livestock.", source: "https://ourworldindata.org/global-land-for-agriculture" },
     { text: "77% of agricultural land is used for livestock; yet animal products provide only 18% of the world's calories.", source: "https://science.sciencemag.org/content/360/6392/987" },
     { text: "Agricultural expansion drives up to 90% of global tropical deforestation.", source: "https://www.fao.org/sustainability/news/detail/en/c/1274219/" },
     { text: "A third of the world's agricultural land has been degraded by erosion in the past 40 years.", source: "https://www.theguardian.com/environment/2015/dec/02/arable-land-soil-food-security-erosion" },
@@ -35,7 +35,7 @@
     // FOOD SYSTEMS
     { text: "The world needs to produce roughly 60% more food by 2050 to feed a projected population of 9.6 billion; yet climate change is simultaneously reducing our capacity to do so.", source: "https://www.nature.com/" },
     { text: "Every additional degree Celsius of warming reduces global food production capacity by approximately 120 calories per person per day.", source: "https://www.nature.com/" },
-    { text: "Climate change is projected to reduce global staple crop yields by 8% by 2050 regardless of future emissions; and by 24% by 2100 under a high-emissions scenario.", source: "https://www.nature.com/" },
+    { text: "Climate change is projected to reduce global staple crop yields by 8% by 2050 regardless of future emissions; by 24% by 2100 under a high-emissions scenario.", source: "https://www.nature.com/" },
     { text: "72% of the world's staple crops are grown in just 5 countries; a synchronized failure across maize, wheat, soybeans, and rice could become possible every 11 years by mid-century.", source: "https://www.woodwellclimate.org/" },
     // HEALTH
     { text: "Microplastics have now been detected in human blood, lungs, placentas, and breast milk.", source: "https://www.nejm.org/doi/full/10.1056/NEJMoa2309822" },
