@@ -29,20 +29,14 @@
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(11,11,11,0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
+    /* ── WORDMARK STACK ── */
+    .wordmarks-stack {
+      width: 100%;
       overflow: hidden;
+      padding-top: 10px;
     }
-    nav.scrolled { border-color: var(--border); }
 
-    #hero-wordmark {
+    .wm {
       font-family: 'Arial Black', Impact, 'Helvetica Neue', Arial, sans-serif;
       font-weight: 900;
       letter-spacing: 0.28em;
@@ -53,38 +47,38 @@
       transform: scaleY(0.58);
       transform-origin: top left;
       line-height: 1;
-      padding-top: 6px;
-      /* font-size set by JS */
+      /* font-size and margin-bottom set by JS */
     }
 
-    .nav-install {
-      position: absolute;
-      top: 50%;
-      right: 40px;
-      transform: translateY(-50%);
-      font-size: 13px;
-      font-weight: bold;
-      color: var(--green);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      transition: opacity 0.15s;
-      background: rgba(11,11,11,0.7);
-      padding: 4px 10px;
-      border-radius: 6px;
+    /* ── MAIN TWO-COLUMN LAYOUT ── */
+    .main-layout {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 0 40px;
+      margin-top: 52px;
     }
-    .nav-install:hover { opacity: 0.7; }
 
-    /* ── HERO CONTENT ── */
-    .hero {
-      padding: 52px 40px 72px;
-      max-width: 860px;
+    .content-left {
+      flex: 1;
+      min-width: 0;
     }
+
+    .content-right {
+      width: 300px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 24px;
+    }
+
+    /* ── HERO ── */
+    .hero { padding-bottom: 64px; }
 
     .hero-tagline {
-      font-size: clamp(18px, 3vw, 26px);
+      font-size: clamp(18px, 2.5vw, 24px);
       color: var(--dim);
-      max-width: 520px;
-      margin-bottom: 40px;
+      max-width: 480px;
+      margin-bottom: 36px;
       line-height: 1.45;
     }
     .hero-tagline em { color: var(--text); font-style: normal; }
@@ -106,16 +100,11 @@
     .btn-install:hover { opacity: 0.88; transform: translateY(-1px); }
     .btn-install svg { flex-shrink: 0; }
 
-    .hero-sub {
-      margin-top: 14px;
-      font-size: 12px;
-      color: var(--muted);
-    }
+    .hero-sub { margin-top: 14px; font-size: 12px; color: var(--muted); }
 
     /* ── DEMO ── */
     .demo {
-      padding: 60px 40px 80px;
-      max-width: 860px;
+      padding: 52px 0 64px;
       border-top: 1px solid var(--border);
     }
 
@@ -133,7 +122,7 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 24px 60px rgba(0,0,0,0.6);
-      max-width: 600px;
+      max-width: 560px;
     }
 
     .email-chrome {
@@ -149,10 +138,7 @@
     .chrome-dot:nth-child(2) { background: #febc2e; }
     .chrome-dot:nth-child(3) { background: #28c840; }
 
-    .email-header {
-      padding: 14px 20px 10px;
-      border-bottom: 1px solid #e0e0e0;
-    }
+    .email-header { padding: 14px 20px 10px; border-bottom: 1px solid #e0e0e0; }
     .email-subject { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; color: #202124; margin-bottom: 3px; }
     .email-meta { font-family: Arial, sans-serif; font-size: 12px; color: #5f6368; }
 
@@ -165,11 +151,7 @@
     }
     .email-body p { margin-bottom: 10px; }
 
-    .uc-block {
-      margin-top: 14px;
-      padding-top: 11px;
-      border-top: 1px solid #e0e0e0;
-    }
+    .uc-block { margin-top: 14px; padding-top: 11px; border-top: 1px solid #e0e0e0; }
     .uc-wordmark-email {
       font-family: 'Arial Black', Impact, sans-serif;
       font-size: 12px;
@@ -185,13 +167,11 @@
     }
     .uc-fact { font-family: Arial, sans-serif; font-size: 12px; color: #555; }
     .uc-fact a { color: #1a73e8; text-decoration: none; font-size: 11px; }
-
     .demo-caption { margin-top: 14px; font-size: 12px; color: var(--muted); }
 
     /* ── FACTS TICKER ── */
     .ticker {
-      padding: 60px 40px 80px;
-      max-width: 860px;
+      padding: 52px 0 64px;
       border-top: 1px solid var(--border);
     }
 
@@ -199,8 +179,8 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 32px;
-      min-height: 120px;
+      padding: 28px;
+      min-height: 110px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -208,22 +188,16 @@
     }
 
     .ticker-fact {
-      font-size: clamp(15px, 2.5vw, 18px);
+      font-size: clamp(14px, 2vw, 17px);
       color: var(--text);
       line-height: 1.5;
       transition: opacity 0.4s;
     }
     .ticker-fact.fade { opacity: 0; }
 
-    .ticker-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
+    .ticker-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .ticker-source { font-size: 11px; color: var(--muted); text-decoration: none; }
     .ticker-source:hover { color: var(--dim); }
-
     .ticker-nav { display: flex; gap: 8px; }
     .ticker-btn {
       background: none;
@@ -239,95 +213,81 @@
     .ticker-btn:hover { border-color: var(--dim); color: var(--text); }
     .ticker-count { font-size: 11px; color: var(--muted); align-self: center; }
 
-    /* ── FEEDBACK ── */
-    .feedback {
-      padding: 60px 40px 80px;
-      max-width: 860px;
-      border-top: 1px solid var(--border);
+    /* ── FEEDBACK (right sticky column) ── */
+    .feedback-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
     }
 
-    .feedback h2 {
-      font-size: clamp(20px, 3vw, 28px);
+    .feedback-panel h3 {
+      font-size: 14px;
       font-weight: bold;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
+      color: var(--text);
     }
 
-    .feedback-sub {
-      font-size: 14px;
-      color: var(--dim);
-      margin-bottom: 28px;
+    .feedback-panel p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.4;
     }
 
-    .feedback-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 560px;
-    }
-
-    .feedback-form textarea {
-      background: var(--surface);
+    .feedback-panel textarea {
+      width: 100%;
+      background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       color: var(--text);
       font-family: Arial, sans-serif;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.5;
-      padding: 14px 16px;
+      padding: 12px 14px;
       resize: vertical;
-      min-height: 110px;
+      min-height: 120px;
       transition: border-color 0.15s;
       outline: none;
+      margin-bottom: 10px;
     }
-    .feedback-form textarea::placeholder { color: var(--muted); }
-    .feedback-form textarea:focus { border-color: var(--dim); }
+    .feedback-panel textarea::placeholder { color: var(--muted); }
+    .feedback-panel textarea:focus { border-color: var(--dim); }
 
-    .feedback-row {
-      display: flex;
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .feedback-form input[type="email"] {
-      flex: 1;
-      background: var(--surface);
+    .feedback-panel input[type="email"] {
+      width: 100%;
+      background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       color: var(--text);
       font-family: Arial, sans-serif;
-      font-size: 14px;
-      padding: 12px 16px;
+      font-size: 13px;
+      padding: 10px 14px;
       transition: border-color 0.15s;
       outline: none;
-      min-width: 0;
+      margin-bottom: 10px;
     }
-    .feedback-form input[type="email"]::placeholder { color: var(--muted); }
-    .feedback-form input[type="email"]:focus { border-color: var(--dim); }
+    .feedback-panel input[type="email"]::placeholder { color: var(--muted); }
+    .feedback-panel input[type="email"]:focus { border-color: var(--dim); }
 
     .btn-submit {
+      width: 100%;
       background: var(--green);
       color: #0b0b0b;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-family: Arial, sans-serif;
       font-size: 13px;
       font-weight: bold;
       letter-spacing: 0.04em;
-      padding: 12px 20px;
+      padding: 11px;
       cursor: pointer;
-      white-space: nowrap;
       transition: opacity 0.15s;
-      flex-shrink: 0;
     }
     .btn-submit:hover { opacity: 0.85; }
     .btn-submit:disabled { opacity: 0.4; cursor: default; }
 
-    .feedback-thanks {
-      font-size: 13px;
-      color: var(--green);
-      display: none;
-      padding-top: 4px;
-    }
+    .feedback-thanks { font-size: 13px; color: var(--green); display: none; margin-top: 12px; text-align: center; }
 
     /* ── FOOTER ── */
     footer {
@@ -338,6 +298,7 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 12px;
+      margin-top: 40px;
     }
 
     .footer-wordmark {
@@ -358,126 +319,135 @@
     .footer-links a:hover { color: var(--dim); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      nav, .hero, .demo, .ticker, .feedback, footer { padding-left: 20px; padding-right: 20px; }
-      .feedback-row { flex-direction: column; }
-      .btn-submit { width: 100%; }
+    @media (max-width: 760px) {
+      .main-layout { flex-direction: column; padding: 0 20px; }
+      .content-right { width: 100%; position: static; }
+      footer { padding-left: 20px; padding-right: 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV with full-width wordmark -->
-  <nav id="nav">
-    <span id="hero-wordmark">Unskippable</span>
-    <a href="#install" class="nav-install">Add to Chrome →</a>
-  </nav>
+  <!-- WORDMARK STACK -->
+  <div class="wordmarks-stack">
+    <span class="wm" style="opacity: 1;">Unskippable</span>
+    <span class="wm" style="opacity: 0.28;">Unskippable</span>
+    <span class="wm" style="opacity: 0.08;">Unskippable</span>
+  </div>
 
-  <!-- HERO CONTENT -->
-  <section class="hero">
-    <p class="hero-tagline">
-      A <em>climate fact</em> in every email you send.<br>
-      Free. Automatic. Unskippable.
-    </p>
-    <a href="#install" class="btn-install" id="install">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-        <circle cx="9" cy="9" r="8.5" stroke="#0b0b0b" stroke-opacity="0.3"/>
-        <path d="M9 5v5.5M9 10.5l-2-2M9 10.5l2-2" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M5.5 13h7" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-      Add to Chrome — it's free
-    </a>
-    <p class="hero-sub">Gmail only &nbsp;·&nbsp; No account needed &nbsp;·&nbsp; 41 sourced facts</p>
-  </section>
+  <!-- MAIN LAYOUT -->
+  <div class="main-layout">
 
-  <!-- DEMO -->
-  <section class="demo">
-    <div class="section-label">What it looks like</div>
-    <div class="email-mock">
-      <div class="email-chrome">
-        <div class="chrome-dot"></div>
-        <div class="chrome-dot"></div>
-        <div class="chrome-dot"></div>
-      </div>
-      <div class="email-header">
-        <div class="email-subject">Re: Quarterly targets</div>
-        <div class="email-meta">To: sarah@company.com</div>
-      </div>
-      <div class="email-body">
-        <p>Makes sense, let's sync Thursday. I'll send a calendar invite.</p>
-        <p>Talk soon,<br>Owen</p>
-        <div class="uc-block">
-          <div><span class="uc-wordmark-email">Unskippable</span></div>
-          <span class="uc-fact">
-            🌍 <span id="demo-text">The last decade (2014–2023) was the hottest ever recorded.</span>
-            <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">↗ source</a>
-          </span>
-        </div>
-      </div>
-    </div>
-    <p class="demo-caption">Appended automatically to every email. Recipients see it like any other signature.</p>
-  </section>
+    <!-- LEFT: content -->
+    <div class="content-left">
 
-  <!-- FACTS TICKER -->
-  <section class="ticker">
-    <div class="section-label">The facts</div>
-    <div class="ticker-inner">
-      <p class="ticker-fact" id="ticker-text"></p>
-      <div class="ticker-meta">
-        <a href="#" class="ticker-source" id="ticker-source" target="_blank">↗ source</a>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span class="ticker-count" id="ticker-count"></span>
-          <div class="ticker-nav">
-            <button class="ticker-btn" id="ticker-prev">‹</button>
-            <button class="ticker-btn" id="ticker-next">›</button>
+      <!-- HERO -->
+      <section class="hero">
+        <p class="hero-tagline">
+          A <em>climate fact</em> in every email you send.<br>
+          Free. Automatic. Unskippable.
+        </p>
+        <a href="https://chrome.google.com/webstore" class="btn-install" id="install">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="9" r="8.5" stroke="#0b0b0b" stroke-opacity="0.3"/>
+            <path d="M9 5v5.5M9 10.5l-2-2M9 10.5l2-2" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5.5 13h7" stroke="#0b0b0b" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Add to Chrome — it's free
+        </a>
+        <p class="hero-sub">Gmail only &nbsp;·&nbsp; No account needed &nbsp;·&nbsp; 41 sourced facts</p>
+      </section>
+
+      <!-- DEMO -->
+      <section class="demo">
+        <div class="section-label">What it looks like</div>
+        <div class="email-mock">
+          <div class="email-chrome">
+            <div class="chrome-dot"></div>
+            <div class="chrome-dot"></div>
+            <div class="chrome-dot"></div>
+          </div>
+          <div class="email-header">
+            <div class="email-subject">Re: Quarterly targets</div>
+            <div class="email-meta">To: sarah@company.com</div>
+          </div>
+          <div class="email-body">
+            <p>Makes sense, let's sync Thursday. I'll send a calendar invite.</p>
+            <p>Talk soon,<br>Owen</p>
+            <div class="uc-block">
+              <div><span class="uc-wordmark-email">Unskippable</span></div>
+              <span class="uc-fact">
+                🌍 <span id="demo-text">The last decade (2014–2023) was the hottest ever recorded.</span>
+                <a href="https://climate.nasa.gov/vital-signs/global-temperature/" target="_blank">↗ source</a>
+              </span>
+            </div>
           </div>
         </div>
+        <p class="demo-caption">Appended automatically to every email. Recipients see it like any other signature.</p>
+      </section>
+
+      <!-- FACTS TICKER -->
+      <section class="ticker">
+        <div class="section-label">The facts</div>
+        <div class="ticker-inner">
+          <p class="ticker-fact" id="ticker-text"></p>
+          <div class="ticker-meta">
+            <a href="#" class="ticker-source" id="ticker-source" target="_blank">↗ source</a>
+            <div style="display:flex;align-items:center;gap:10px;">
+              <span class="ticker-count" id="ticker-count"></span>
+              <div class="ticker-nav">
+                <button class="ticker-btn" id="ticker-prev">‹</button>
+                <button class="ticker-btn" id="ticker-next">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /content-left -->
+
+    <!-- RIGHT: sticky feedback -->
+    <div class="content-right">
+      <div class="feedback-panel">
+        <h3>Tell us what you think</h3>
+        <p>Love it, hate it, have a suggestion — we read everything.</p>
+        <form id="feedback-form">
+          <textarea name="message" placeholder="What's on your mind?"></textarea>
+          <input type="email" name="email" placeholder="Your email (optional)">
+          <button type="submit" class="btn-submit" id="submit-btn">Send</button>
+          <p class="feedback-thanks" id="feedback-thanks">Thanks — we got it. ✓</p>
+        </form>
       </div>
     </div>
-  </section>
 
-  <!-- FEEDBACK -->
-  <section class="feedback">
-    <h2>Tell us what you think</h2>
-    <p class="feedback-sub">Love it, hate it, have a suggestion — we read everything.</p>
-    <!-- Formspree: replace YOUR_FORM_ID after creating form at formspree.io -->
-    <form class="feedback-form" id="feedback-form">
-      <textarea name="message" placeholder="What's on your mind?"></textarea>
-      <div class="feedback-row">
-        <input type="email" name="email" placeholder="Your email (optional)">
-        <button type="submit" class="btn-submit" id="submit-btn">Send</button>
-      </div>
-      <p class="feedback-thanks" id="feedback-thanks">Thanks — we got it. ✓</p>
-    </form>
-  </section>
+  </div><!-- /main-layout -->
 
   <!-- FOOTER -->
   <footer>
     <span class="footer-wordmark">Unskippable</span>
     <div class="footer-links">
       <a href="https://chrome.google.com/webstore" target="_blank">Chrome Web Store</a>
-      <a href="https://github.com" target="_blank">GitHub</a>
+      <a href="https://github.com/moovapp2023/unskippable" target="_blank">GitHub</a>
     </div>
   </footer>
 
   <script>
-    // ── Fit wordmark to exact nav width ──
-    const wm = document.getElementById('hero-wordmark');
-    const navEl = document.getElementById('nav');
-    function fitWordmark() {
-      wm.style.fontSize = '100px';
-      const naturalWidth = wm.scrollWidth;
-      const targetWidth = navEl.clientWidth;
-      wm.style.fontSize = (100 * targetWidth / naturalWidth) + 'px';
-    }
-    fitWordmark();
-    window.addEventListener('resize', fitWordmark);
+    // ── Fit wordmarks to exact page width ──
+    const wms = document.querySelectorAll('.wm');
+    function fitWordmarks() {
+      wms[0].style.fontSize = '100px';
+      wms[0].style.marginBottom = '0';
+      const naturalWidth = wms[0].scrollWidth;
+      const fontSize = 100 * document.documentElement.clientWidth / naturalWidth;
+      const compensation = -(fontSize * 0.42); // pull up extra layout space from scaleY(0.58)
 
-    // ── Nav border on scroll ──
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 10);
-    });
+      wms.forEach(wm => {
+        wm.style.fontSize = fontSize + 'px';
+        wm.style.marginBottom = compensation + 'px';
+      });
+    }
+    fitWordmarks();
+    window.addEventListener('resize', fitWordmarks);
 
     // ── Facts ──
     const FACTS = [
@@ -534,7 +504,6 @@
       tickerIndex = (tickerIndex - 1 + FACTS.length) % FACTS.length;
       showFact(tickerIndex);
     });
-
     showFact(0);
     setInterval(() => {
       tickerIndex = (tickerIndex + 1) % FACTS.length;
@@ -558,16 +527,13 @@
     }, 5000);
 
     // ── Feedback form ──
-    // Uses Formspree — create a free form at formspree.io and replace the URL below
     const FORMSPREE_URL = 'https://formspree.io/f/mdayzlpb';
-
     document.getElementById('feedback-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submit-btn');
       const thanks = document.getElementById('feedback-thanks');
       const form = e.target;
-      const message = form.message.value.trim();
-      if (!message) return;
+      if (!form.message.value.trim()) return;
 
       btn.disabled = true;
       btn.textContent = 'Sending…';
@@ -576,9 +542,8 @@
         const res = await fetch(FORMSPREE_URL, {
           method: 'POST',
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message, email: form.email.value }),
+          body: JSON.stringify({ message: form.message.value, email: form.email.value }),
         });
-
         if (res.ok) {
           form.message.value = '';
           form.email.value = '';
@@ -587,7 +552,6 @@
         } else {
           btn.disabled = false;
           btn.textContent = 'Send';
-          alert('Something went wrong. Try again.');
         }
       } catch {
         btn.disabled = false;
