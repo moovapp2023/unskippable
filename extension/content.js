@@ -98,7 +98,7 @@
       `</span>`;
 
     const block =
-      `<div data-uc="1" style="padding:10px 0;border-top:1px solid #e0e0e0;font-family:Arial,sans-serif;">` +
+      `<div data-uc="1" contenteditable="false" style="padding:10px 0;border-top:1px solid #e0e0e0;font-family:Arial,sans-serif;">` +
         brandHTML + factHTML +
       `</div>`;
 
@@ -110,7 +110,7 @@
     const old = body.querySelector('[data-uc]');
     if (old) old.remove();
 
-    // Save cursor so inserting into the DOM doesn't move it
+    // Save cursor only if it's already inside the compose body
     const sel = window.getSelection();
     let savedRange = null;
     if (sel && sel.rangeCount > 0 && body.contains(sel.getRangeAt(0).commonAncestorContainer)) {
@@ -124,31 +124,23 @@
       body.insertAdjacentHTML('beforeend', html);
     }
 
-    // Restore cursor to where it was
-    if (savedRange) {
+    // If body is focused, place cursor before the snippet so typing lands above it
+    if (position !== 'top' && body.contains(document.activeElement || sel?.focusNode)) {
+      const ucNode = body.querySelector('[data-uc]');
+      const target = ucNode ? ucNode.previousSibling : null;
+      const range = document.createRange();
+      if (target) {
+        range.setStartBefore(target);
+      } else {
+        range.setStart(body, 0);
+      }
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } else if (savedRange) {
       sel.removeAllRanges();
       sel.addRange(savedRange);
     }
-  }
-
-  // execCommand inject; used only on send so Gmail captures it properly
-  function injectOnSend(body, fact, position) {
-    const old = body.querySelector('[data-uc]');
-    if (old) old.remove();
-
-    const savedActive = document.activeElement;
-
-    body.focus();
-    const sel = window.getSelection();
-    const range = document.createRange();
-    range.selectNodeContents(body);
-    range.collapse(position !== 'top'); // false = collapse to start (top), true = end (bottom)
-    sel.removeAllRanges();
-    sel.addRange(range);
-
-    document.execCommand('insertHTML', false, buildFactHTML(fact, position));
-
-    if (savedActive && savedActive !== body) savedActive.focus();
   }
 
   const seen = new WeakSet();
@@ -168,7 +160,8 @@
 
   observer.observe(document.body, { childList: true, subtree: true });
 
-  // On send: re-inject via execCommand so it survives Gmail's serialisation
+  // On send: move snippet to absolute end so user text always comes first,
+  // regardless of where the cursor was during compose
   document.addEventListener('click', (e) => {
     const isSend =
       e.target.closest('[data-tooltip*="Send"]') ||
@@ -178,7 +171,11 @@
     const body = document.querySelector('div[aria-label="Message Body"]');
     if (!body) return;
 
-    injectOnSend(body, getNextFact(), preferredPosition);
+    const uc = body.querySelector('[data-uc]');
+    if (uc) {
+      uc.remove();
+      body.insertAdjacentHTML('beforeend', uc.outerHTML);
+    }
   }, true);
 
   // Listen for position changes from popup
