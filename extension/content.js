@@ -83,11 +83,15 @@
 
   function buildFactHTML(fact, position) {
     const brandHTML =
-      `<div style="margin-bottom:5px;">` +
-        `<span style="font-family:'Arial Black',Impact,'Helvetica Neue',Arial,sans-serif;` +
-                     `font-size:13px;font-weight:900;letter-spacing:0.28em;text-transform:uppercase;` +
-                     `display:inline-block;transform:scaleY(0.58);transform-origin:bottom left;` +
-                     `color:#b0b0b0;line-height:1;">UNSKIPPABLE</span>` +
+      `<div style="display:table;width:100%;margin-bottom:4px;">` +
+        `<a href="https://unskippable.vercel.app" target="_blank" style="display:table-cell;text-decoration:none;vertical-align:baseline;">` +
+          `<span style="font-family:'Arial Black',Impact,'Helvetica Neue',Arial,sans-serif;` +
+                       `font-size:9px;font-weight:900;letter-spacing:0.32em;text-transform:uppercase;` +
+                       `color:#b0b0b0;line-height:1;">UNSKIPPABLE</span>` +
+        `</a>` +
+        `<a href="https://unskippable.vercel.app" target="_blank" ` +
+           `style="display:table-cell;text-align:right;text-decoration:none;vertical-align:baseline;` +
+                  `font-family:Arial,sans-serif;font-size:10px;color:#c0c0c0;">get yours →</a>` +
       `</div>`;
 
     const factHTML =
