@@ -107,8 +107,7 @@
 
   // Silent DOM inject; no focus stealing, just visual
   function injectSilent(body, fact, position) {
-    const old = body.querySelector('[data-uc]');
-    if (old) old.remove();
+    body.querySelectorAll('[data-uc]').forEach(el => el.remove());
 
     // Save cursor only if it's already inside the compose body
     const sel = window.getSelection();
@@ -148,7 +147,9 @@
   function tryInject(body) {
     if (seen.has(body)) return;
     seen.add(body);
-    setTimeout(() => injectSilent(body, getNextFact(), preferredPosition), 400);
+    // Delay long enough for Gmail to finish loading draft content into the body,
+    // so injectSilent can find and remove any snippets saved in the draft
+    setTimeout(() => injectSilent(body, getNextFact(), preferredPosition), 1200);
   }
 
   // Watch for compose bodies
@@ -171,9 +172,10 @@
     const body = document.querySelector('div[aria-label="Message Body"]');
     if (!body) return;
 
-    const uc = body.querySelector('[data-uc]');
+    const all = [...body.querySelectorAll('[data-uc]')];
+    const uc = all[0];
+    all.forEach(el => el.remove());
     if (uc) {
-      uc.remove();
       body.insertAdjacentHTML('beforeend', uc.outerHTML);
     }
   }, true);
