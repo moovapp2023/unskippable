@@ -113,6 +113,13 @@
   const bodyFacts = new WeakMap();
   let isSending = false;
 
+  // Gmail strips data-* attributes when saving drafts, so we can't rely on
+  // data-uc to find old snippets. Detect by the unskippable.vercel.app link instead.
+  function findSavedSnippets(container) {
+    return [...container.querySelectorAll('div[contenteditable="false"]')]
+      .filter(el => el.querySelector('a[href*="unskippable.vercel.app"]'));
+  }
+
   // Render preview OUTSIDE the compose body so it is never saved into drafts
   function showPreview(body) {
     if (isSending) return;
@@ -122,7 +129,7 @@
     if (body.parentNode.querySelector('[data-uc-preview]')) return;
 
     // Purge any snippet that leaked into the body from a previous draft save
-    body.querySelectorAll('[data-uc]').forEach(el => el.remove());
+    findSavedSnippets(body).forEach(el => el.remove());
 
     let fact = bodyFacts.get(body);
     if (!fact) {
@@ -157,7 +164,7 @@
     setTimeout(() => { isSending = false; }, 2000);
 
     document.querySelectorAll('[data-uc-preview]').forEach(el => el.remove());
-    body.querySelectorAll('[data-uc]').forEach(el => el.remove());
+    findSavedSnippets(body).forEach(el => el.remove());
 
     const fact = bodyFacts.get(body) || getNextFact();
     body.insertAdjacentHTML('beforeend', buildFactHTML(fact, preferredPosition));
