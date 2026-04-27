@@ -125,11 +125,12 @@
     if (isSending) return;
     if (!body.parentNode) return;
 
-    // Already showing a preview for this body
-    if (body.parentNode.querySelector('[data-uc-preview]')) return;
-
-    // Purge any snippet that leaked into the body from a previous draft save
+    // Always purge snippets from the body — Gmail can load draft content at any
+    // time, including after the preview is already showing
     findSavedSnippets(body).forEach(el => el.remove());
+
+    // Preview already exists — nothing more to do
+    if (body.parentNode.querySelector('[data-uc-preview]')) return;
 
     let fact = bodyFacts.get(body);
     if (!fact) {
