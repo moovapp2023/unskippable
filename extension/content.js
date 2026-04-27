@@ -109,75 +109,41 @@
     return position === 'top' ? block + '<br>' : '<br>' + block;
   }
 
-  // Silent DOM inject; no focus stealing, just visual
-  function injectSilent(body, fact, position) {
+  // bodyFacts maps each compose body → the fact assigned to it
+  const bodyFacts = new WeakMap();
+  let isSending = false;
+
+  // Render preview OUTSIDE the compose body so it is never saved into drafts
+  function showPreview(body) {
+    if (isSending) return;
+    if (!body.parentNode) return;
+
+    // Already showing a preview for this body
+    if (body.parentNode.querySelector('[data-uc-preview]')) return;
+
+    // Purge any snippet that leaked into the body from a previous draft save
     body.querySelectorAll('[data-uc]').forEach(el => el.remove());
 
-    // Save cursor only if it's already inside the compose body
-    const sel = window.getSelection();
-    let savedRange = null;
-    if (sel && sel.rangeCount > 0 && body.contains(sel.getRangeAt(0).commonAncestorContainer)) {
-      savedRange = sel.getRangeAt(0).cloneRange();
+    let fact = bodyFacts.get(body);
+    if (!fact) {
+      fact = getNextFact();
+      bodyFacts.set(body, fact);
     }
 
-    const html = buildFactHTML(fact, position);
-    if (position === 'top') {
-      body.insertAdjacentHTML('afterbegin', html);
-    } else {
-      body.insertAdjacentHTML('beforeend', html);
-    }
-
-    // If body is focused, place cursor before the snippet so typing lands above it
-    if (position !== 'top' && body.contains(document.activeElement || sel?.focusNode)) {
-      const ucNode = body.querySelector('[data-uc]');
-      const target = ucNode ? ucNode.previousSibling : null;
-      const range = document.createRange();
-      if (target) {
-        range.setStartBefore(target);
-      } else {
-        range.setStart(body, 0);
-      }
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
-    } else if (savedRange) {
-      sel.removeAllRanges();
-      sel.addRange(savedRange);
-    }
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('data-uc-preview', '1');
+    wrapper.innerHTML = buildFactHTML(fact, preferredPosition);
+    body.parentNode.insertBefore(wrapper, body.nextSibling);
   }
 
-  const pending = new WeakSet();
-
-  function onBodySeen(body) {
-    const snippets = [...body.querySelectorAll('[data-uc]')];
-
-    if (snippets.length > 1) {
-      snippets.slice(1).forEach(el => el.remove());
-      return;
-    }
-
-    if (snippets.length === 1) return;
-
-    if (!pending.has(body)) {
-      pending.add(body);
-      setTimeout(() => {
-        pending.delete(body);
-        if (!body.querySelector('[data-uc]')) {
-          injectSilent(body, getNextFact(), preferredPosition);
-        }
-      }, 800);
-    }
-  }
-
-  // Watch for compose bodies
   const observer = new MutationObserver(() => {
-    document.querySelectorAll('div[aria-label="Message Body"]').forEach(onBodySeen);
+    if (isSending) return;
+    document.querySelectorAll('div[aria-label="Message Body"]').forEach(showPreview);
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
 
-  // On send: move snippet to absolute end so user text always comes first,
-  // regardless of where the cursor was during compose
+  // On send: remove preview, inject once into body so Gmail serialises it
   document.addEventListener('click', (e) => {
     const isSend =
       e.target.closest('[data-tooltip*="Send"]') ||
@@ -187,12 +153,14 @@
     const body = document.querySelector('div[aria-label="Message Body"]');
     if (!body) return;
 
-    const all = [...body.querySelectorAll('[data-uc]')];
-    const uc = all[0];
-    all.forEach(el => el.remove());
-    if (uc) {
-      body.insertAdjacentHTML('beforeend', uc.outerHTML);
-    }
+    isSending = true;
+    setTimeout(() => { isSending = false; }, 2000);
+
+    document.querySelectorAll('[data-uc-preview]').forEach(el => el.remove());
+    body.querySelectorAll('[data-uc]').forEach(el => el.remove());
+
+    const fact = bodyFacts.get(body) || getNextFact();
+    body.insertAdjacentHTML('beforeend', buildFactHTML(fact, preferredPosition));
   }, true);
 
   // Listen for position changes from popup
