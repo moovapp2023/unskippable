@@ -109,28 +109,27 @@
     return position === 'top' ? block + '<br>' : '<br>' + block;
   }
 
-  // bodyFacts maps each compose body → the fact assigned to it
   const bodyFacts = new WeakMap();
   let isSending = false;
+  let isInjecting = false;
 
-  // Gmail strips data-* attributes when saving drafts, so we can't rely on
-  // data-uc to find old snippets. Detect by the unskippable.vercel.app link instead.
+  // Gmail strips data-* when saving drafts — detect our snippets by URL instead
   function findSavedSnippets(container) {
     return [...container.querySelectorAll('div[contenteditable="false"]')]
       .filter(el => el.querySelector('a[href*="unskippable.vercel.app"]'));
   }
 
-  // Render preview OUTSIDE the compose body so it is never saved into drafts
-  function showPreview(body) {
-    if (isSending) return;
-    if (!body.parentNode) return;
+  function ensureSnippet(body) {
+    if (isSending || isInjecting) return;
 
-    // Always purge snippets from the body — Gmail can load draft content at any
-    // time, including after the preview is already showing
-    findSavedSnippets(body).forEach(el => el.remove());
+    const snippets = findSavedSnippets(body);
 
-    // Preview already exists — nothing more to do
-    if (body.parentNode.querySelector('[data-uc-preview]')) return;
+    // Already have exactly one fresh snippet (data-uc present = injected by us, not from draft)
+    if (snippets.length === 1 && snippets[0].hasAttribute('data-uc')) return;
+
+    // Stale snippets (data-uc stripped by Gmail's draft save), duplicates, or none — fix it
+    isInjecting = true;
+    snippets.forEach(el => el.remove());
 
     let fact = bodyFacts.get(body);
     if (!fact) {
@@ -138,20 +137,23 @@
       bodyFacts.set(body, fact);
     }
 
-    const wrapper = document.createElement('div');
-    wrapper.setAttribute('data-uc-preview', '1');
-    wrapper.innerHTML = buildFactHTML(fact, preferredPosition);
-    body.parentNode.insertBefore(wrapper, body.nextSibling);
+    if (preferredPosition === 'top') {
+      body.insertAdjacentHTML('afterbegin', buildFactHTML(fact, preferredPosition));
+    } else {
+      body.insertAdjacentHTML('beforeend', buildFactHTML(fact, preferredPosition));
+    }
+
+    isInjecting = false;
   }
 
   const observer = new MutationObserver(() => {
-    if (isSending) return;
-    document.querySelectorAll('div[aria-label="Message Body"]').forEach(showPreview);
+    if (isSending || isInjecting) return;
+    document.querySelectorAll('div[aria-label="Message Body"]').forEach(ensureSnippet);
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
 
-  // On send: remove preview, inject once into body so Gmail serialises it
+  // On send: guarantee exactly one snippet at the end
   document.addEventListener('click', (e) => {
     const isSend =
       e.target.closest('[data-tooltip*="Send"]') ||
@@ -164,9 +166,7 @@
     isSending = true;
     setTimeout(() => { isSending = false; }, 2000);
 
-    document.querySelectorAll('[data-uc-preview]').forEach(el => el.remove());
     findSavedSnippets(body).forEach(el => el.remove());
-
     const fact = bodyFacts.get(body) || getNextFact();
     body.insertAdjacentHTML('beforeend', buildFactHTML(fact, preferredPosition));
   }, true);
