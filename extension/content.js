@@ -138,6 +138,8 @@
       stale.forEach(el => el.remove());
     });
     mo.observe(body, { childList: true, subtree: true });
+    // Draft content loads within a few seconds; no need to keep watching forever
+    setTimeout(() => mo.disconnect(), 10000);
   }
 
   function tryInject(body) {
@@ -170,7 +172,7 @@
     findSavedSnippets(body).forEach(el => el.remove());
     const fact = bodyFacts.get(body) || getNextFact();
     body.insertAdjacentHTML('beforeend', buildFactHTML(fact, preferredPosition));
-  }, true);
+  }, false);
 
   // Listen for position changes from popup
   chrome.storage.onChanged.addListener((changes) => {
