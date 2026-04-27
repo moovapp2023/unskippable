@@ -120,7 +120,13 @@
   }
 
   function injectSnippet(body) {
-    findSavedSnippets(body).forEach(el => el.remove());
+    const all = findSavedSnippets(body);
+    // If our fresh snippet is already there, only remove stale leftovers
+    if (all.some(el => el.hasAttribute('data-uc'))) {
+      all.filter(el => !el.hasAttribute('data-uc')).forEach(el => el.remove());
+      return;
+    }
+    all.forEach(el => el.remove());
     let fact = bodyFacts.get(body);
     if (!fact) { fact = getNextFact(); bodyFacts.set(body, fact); }
     body.insertAdjacentHTML(
