@@ -146,21 +146,32 @@
     }
   }
 
-  const seen = new WeakSet();
+  const pending = new WeakSet();
 
-  function tryInject(body) {
-    if (seen.has(body)) return;
-    seen.add(body);
-    // Delay long enough for Gmail to finish loading draft content into the body,
-    // so injectSilent can find and remove any snippets saved in the draft
-    setTimeout(() => injectSilent(body, getNextFact(), preferredPosition), 1200);
+  function onBodySeen(body) {
+    const snippets = [...body.querySelectorAll('[data-uc]')];
+
+    if (snippets.length > 1) {
+      snippets.slice(1).forEach(el => el.remove());
+      return;
+    }
+
+    if (snippets.length === 1) return;
+
+    if (!pending.has(body)) {
+      pending.add(body);
+      setTimeout(() => {
+        pending.delete(body);
+        if (!body.querySelector('[data-uc]')) {
+          injectSilent(body, getNextFact(), preferredPosition);
+        }
+      }, 800);
+    }
   }
 
   // Watch for compose bodies
   const observer = new MutationObserver(() => {
-    document.querySelectorAll('div[aria-label="Message Body"]').forEach(body => {
-      tryInject(body);
-    });
+    document.querySelectorAll('div[aria-label="Message Body"]').forEach(onBodySeen);
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
