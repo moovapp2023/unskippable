@@ -110,8 +110,8 @@
   }
 
   const bodyFacts = new WeakMap();
+  const processed = new WeakSet();
   let isSending = false;
-  let isInjecting = false;
 
   // Gmail strips data-* when saving drafts — detect our snippets by URL instead
   function findSavedSnippets(container) {
@@ -119,36 +119,37 @@
       .filter(el => el.querySelector('a[href*="unskippable.vercel.app"]'));
   }
 
-  function ensureSnippet(body) {
-    if (isSending || isInjecting) return;
-
-    const snippets = findSavedSnippets(body);
-
-    // Already have exactly one fresh snippet (data-uc present = injected by us, not from draft)
-    if (snippets.length === 1 && snippets[0].hasAttribute('data-uc')) return;
-
-    // Stale snippets (data-uc stripped by Gmail's draft save), duplicates, or none — fix it
-    isInjecting = true;
-    snippets.forEach(el => el.remove());
-
+  function injectSnippet(body) {
+    findSavedSnippets(body).forEach(el => el.remove());
     let fact = bodyFacts.get(body);
-    if (!fact) {
-      fact = getNextFact();
-      bodyFacts.set(body, fact);
-    }
+    if (!fact) { fact = getNextFact(); bodyFacts.set(body, fact); }
+    body.insertAdjacentHTML(
+      preferredPosition === 'top' ? 'afterbegin' : 'beforeend',
+      buildFactHTML(fact, preferredPosition)
+    );
+  }
 
-    if (preferredPosition === 'top') {
-      body.insertAdjacentHTML('afterbegin', buildFactHTML(fact, preferredPosition));
-    } else {
-      body.insertAdjacentHTML('beforeend', buildFactHTML(fact, preferredPosition));
-    }
+  // Watch the body itself for stale snippets that load in after our injection
+  // (e.g. Gmail loads draft content after our 1500ms timeout fired)
+  function watchBody(body) {
+    const mo = new MutationObserver(() => {
+      if (isSending) return;
+      const stale = findSavedSnippets(body).filter(el => !el.hasAttribute('data-uc'));
+      stale.forEach(el => el.remove());
+    });
+    mo.observe(body, { childList: true, subtree: true });
+  }
 
-    isInjecting = false;
+  function tryInject(body) {
+    if (processed.has(body)) return;
+    processed.add(body);
+    // 1500ms gives Gmail time to finish loading draft content so we can clean
+    // it all up in one shot before injecting our fresh snippet
+    setTimeout(() => { injectSnippet(body); watchBody(body); }, 1500);
   }
 
   const observer = new MutationObserver(() => {
-    if (isSending || isInjecting) return;
-    document.querySelectorAll('div[aria-label="Message Body"]').forEach(ensureSnippet);
+    document.querySelectorAll('div[aria-label="Message Body"]').forEach(tryInject);
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
