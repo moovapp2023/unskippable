@@ -121,14 +121,17 @@
 
   function injectSnippet(body) {
     const all = findSavedSnippets(body);
+    console.log('[UC] injectSnippet fired — snippets found:', all.length, all.map(el => ({ hasUc: el.hasAttribute('data-uc') })));
     // If our fresh snippet is already there, only remove stale leftovers
     if (all.some(el => el.hasAttribute('data-uc'))) {
       all.filter(el => !el.hasAttribute('data-uc')).forEach(el => el.remove());
+      console.log('[UC] fresh snippet already present, skipping re-inject');
       return;
     }
     all.forEach(el => el.remove());
     let fact = bodyFacts.get(body);
     if (!fact) { fact = getNextFact(); bodyFacts.set(body, fact); }
+    console.log('[UC] injecting fresh snippet');
     body.insertAdjacentHTML(
       preferredPosition === 'top' ? 'afterbegin' : 'beforeend',
       buildFactHTML(fact, preferredPosition)
@@ -151,6 +154,7 @@
   function tryInject(body) {
     if (processed.has(body)) return;
     processed.add(body);
+    console.log('[UC] tryInject: new body element detected, scheduling injection');
     // 1500ms gives Gmail time to finish loading draft content so we can clean
     // it all up in one shot before injecting our fresh snippet
     setTimeout(() => { injectSnippet(body); watchBody(body); }, 1500);
