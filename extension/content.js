@@ -156,7 +156,7 @@
     findSavedSnippets(body).forEach(el => el.remove());
     const fact = bodyFacts.get(body) || getNextFact();
     body.insertAdjacentHTML('beforeend', buildFactHTML(fact, preferredPosition));
-  }, false);
+  }, true);
 
   // Listen for position changes from popup
   chrome.storage.onChanged.addListener((changes) => {
