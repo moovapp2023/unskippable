@@ -113,79 +113,40 @@
   const processed = new WeakSet();
   let isSending = false;
 
-  // Gmail strips data-* when saving drafts — detect our snippets by URL instead
+  // Remove stale snippets from inside the contenteditable (saved draft leftovers)
   function findSavedSnippets(container) {
     return [...container.querySelectorAll('div[contenteditable="false"]')]
       .filter(el => el.querySelector('a[href*="unskippable.vercel.app"]'));
   }
 
-  function injectSnippet(body) {
-    const all = findSavedSnippets(body);
-    if (all.some(el => el.hasAttribute('data-uc'))) {
-      all.filter(el => !el.hasAttribute('data-uc')).forEach(el => el.remove());
-      return;
-    }
-    all.forEach(el => el.remove());
+  // Show a preview div as a sibling of the body — outside the contenteditable
+  // so Gmail never sees it as compose activity and never activates its focus trap.
+  function showPreview(body) {
+    if (!document.body.contains(body)) return;
     let fact = bodyFacts.get(body);
     if (!fact) { fact = getNextFact(); bodyFacts.set(body, fact); }
-    body.insertAdjacentHTML(
-      preferredPosition === 'top' ? 'afterbegin' : 'beforeend',
-      buildFactHTML(fact, preferredPosition)
-    );
-  }
 
-  // Watch the body itself for stale snippets that load in after our injection
-  function watchBody(body) {
-    const mo = new MutationObserver(() => {
-      if (isSending) return;
-      const stale = findSavedSnippets(body).filter(el => !el.hasAttribute('data-uc'));
-      stale.forEach(el => el.remove());
-    });
-    mo.observe(body, { childList: true, subtree: true });
-    setTimeout(() => mo.disconnect(), 10000);
+    // Remove any existing preview for this compose
+    const parent = body.parentElement;
+    if (!parent) return;
+    parent.querySelectorAll('[data-uc-preview]').forEach(el => el.remove());
+
+    const preview = document.createElement('div');
+    preview.setAttribute('data-uc-preview', '1');
+    // Match the snippet style but live outside the contenteditable
+    preview.innerHTML = buildFactHTML(fact, 'bottom').replace(/^<br>/, '');
+    // Insert immediately after the body div
+    body.insertAdjacentElement('afterend', preview);
   }
 
   function tryInject(body) {
     if (processed.has(body)) return;
     processed.add(body);
-    // Wait until the compose loses focus before touching the contenteditable —
-    // modifying it while focused locks Gmail's compose and requires an extra click to escape.
-    setTimeout(() => scheduleInjectWhenUnfocused(body), 1500);
-  }
-
-  // Log focus changes on the compose body so we can trace the double-click cause
-  function attachFocusDiagnostics(body) {
-    document.addEventListener('focusin', (e) => {
-      if (body.contains(e.target)) console.log('[UC] FOCUSIN compose', e.target.tagName);
-    });
-    document.addEventListener('focusout', (e) => {
-      if (body === e.target || body.contains(e.target))
-        console.log('[UC] FOCUSOUT compose → relatedTarget:', e.relatedTarget?.tagName, e.relatedTarget?.getAttribute?.('aria-label'));
-    });
-    document.addEventListener('click', (e) => {
-      console.log('[UC] CLICK', e.target.tagName, e.target.getAttribute?.('aria-label') || e.target.className?.toString().slice(0,40));
-    }, true);
-  }
-
-  function scheduleInjectWhenUnfocused(body) {
-    if (!document.body.contains(body)) return;
-    attachFocusDiagnostics(body);
-    const isFocused = body === document.activeElement || body.contains(document.activeElement);
-    if (!isFocused) {
-      injectSnippet(body);
-      watchBody(body);
-    } else {
-      body.addEventListener('focusout', function handler(e) {
-        if (body.contains(e.relatedTarget)) return;
-        body.removeEventListener('focusout', handler);
-        console.log('[UC] focusout fired — scheduling injection');
-        setTimeout(() => {
-          console.log('[UC] injecting (deferred). activeElement now:', document.activeElement?.getAttribute?.('aria-label') || document.activeElement?.tagName);
-          if (document.body.contains(body)) { injectSnippet(body); watchBody(body); }
-          setTimeout(() => console.log('[UC] post-inject activeElement:', document.activeElement?.getAttribute?.('aria-label') || document.activeElement?.tagName), 100);
-        }, 0);
-      });
-    }
+    // Clean up any stale in-body snippets from saved drafts, then show preview
+    setTimeout(() => {
+      findSavedSnippets(body).forEach(el => el.remove());
+      showPreview(body);
+    }, 1500);
   }
 
   let observerTimer = null;
