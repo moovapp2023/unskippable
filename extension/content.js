@@ -106,7 +106,7 @@
         brandHTML + factHTML +
       `</div>`;
 
-    return position === 'top' ? block + '<br>' : '<br>' + block;
+    return position === 'top' ? block + '<br>' : block;
   }
 
   const bodyFacts = new WeakMap();
