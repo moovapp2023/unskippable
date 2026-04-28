@@ -160,8 +160,12 @@
     setTimeout(() => { injectSnippet(body); watchBody(body); }, 1500);
   }
 
+  let observerTimer = null;
   const observer = new MutationObserver(() => {
-    document.querySelectorAll('div[aria-label="Message Body"]').forEach(tryInject);
+    clearTimeout(observerTimer);
+    observerTimer = setTimeout(() => {
+      document.querySelectorAll('div[aria-label="Message Body"]').forEach(tryInject);
+    }, 300);
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
