@@ -109,54 +109,8 @@
     return position === 'top' ? block + '<br>' : block;
   }
 
-  const bodyFacts = new WeakMap();
-  const registered = new WeakSet();
-
-  function findSavedSnippets(container) {
-    return [...container.querySelectorAll('a[href*="unskippable.vercel.app"]')]
-      .map(a => a.closest('div[contenteditable="false"]'))
-      .filter(Boolean);
-  }
-
-  // Pre-assign a fact when a compose body is first detected so the same
-  // fact is used if the user sends without ever triggering re-detection.
-  function registerBody(body) {
-    if (registered.has(body)) return;
-    registered.add(body);
-    console.log('[UC] compose body registered');
-    if (!bodyFacts.has(body)) bodyFacts.set(body, getNextFact());
-    setTimeout(() => {
-      const stale = findSavedSnippets(body);
-      console.log('[UC] stale snippet cleanup — found:', stale.length);
-      stale.forEach(el => el.remove());
-    }, 1500);
-
-    // Watch for focus trap activation: log every click so we can see
-    // whether the overlay appears before or after our code does anything
-    document.addEventListener('click', (e) => {
-      console.log('[UC] click —', e.target.tagName, e.target.className?.toString().slice(0, 40), '| activeElement:', document.activeElement?.getAttribute('aria-label') || document.activeElement?.tagName);
-    }, true);
-    document.addEventListener('focusin', (e) => {
-      console.log('[UC] focusin —', e.target.getAttribute('aria-label') || e.target.tagName);
-    });
-    document.addEventListener('focusout', (e) => {
-      console.log('[UC] focusout —', e.target.getAttribute('aria-label') || e.target.tagName, '→', e.relatedTarget?.getAttribute('aria-label') || e.relatedTarget?.tagName || 'null');
-    });
-  }
-
-  let observerTimer = null;
-  const observer = new MutationObserver(() => {
-    clearTimeout(observerTimer);
-    observerTimer = setTimeout(() => {
-      document.querySelectorAll('div[aria-label="Message Body"]').forEach(registerBody);
-    }, 300);
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
-
-  // Only write to the contenteditable at send time — this is the sole DOM
-  // mutation we make inside the body, and it doesn't matter at that point
-  // because Gmail is already committed to sending.
+  // Stripped to minimum to isolate double-click cause.
+  // Send handler only — no MutationObserver, no registerBody.
   document.addEventListener('click', (e) => {
     const isSend =
       e.target.closest('[data-tooltip*="Send"]') ||
@@ -166,9 +120,7 @@
     const body = document.querySelector('div[aria-label="Message Body"]');
     if (!body) return;
 
-    findSavedSnippets(body).forEach(el => el.remove());
-    const fact = bodyFacts.get(body) || getNextFact();
-    body.insertAdjacentHTML('beforeend', buildFactHTML(fact, preferredPosition));
+    body.insertAdjacentHTML('beforeend', buildFactHTML(getNextFact(), preferredPosition));
   }, true);
 
   // Listen for position changes from popup
