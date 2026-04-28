@@ -121,17 +121,13 @@
 
   function injectSnippet(body) {
     const all = findSavedSnippets(body);
-    console.log('[UC] injectSnippet fired — snippets found:', all.length, all.map(el => ({ hasUc: el.hasAttribute('data-uc') })));
-    // If our fresh snippet is already there, only remove stale leftovers
     if (all.some(el => el.hasAttribute('data-uc'))) {
       all.filter(el => !el.hasAttribute('data-uc')).forEach(el => el.remove());
-      console.log('[UC] fresh snippet already present, skipping re-inject');
       return;
     }
     all.forEach(el => el.remove());
     let fact = bodyFacts.get(body);
     if (!fact) { fact = getNextFact(); bodyFacts.set(body, fact); }
-    console.log('[UC] injecting fresh snippet');
     body.insertAdjacentHTML(
       preferredPosition === 'top' ? 'afterbegin' : 'beforeend',
       buildFactHTML(fact, preferredPosition)
@@ -139,7 +135,6 @@
   }
 
   // Watch the body itself for stale snippets that load in after our injection
-  // (e.g. Gmail loads draft content after our 1500ms timeout fired)
   function watchBody(body) {
     const mo = new MutationObserver(() => {
       if (isSending) return;
@@ -147,17 +142,31 @@
       stale.forEach(el => el.remove());
     });
     mo.observe(body, { childList: true, subtree: true });
-    // Draft content loads within a few seconds; no need to keep watching forever
     setTimeout(() => mo.disconnect(), 10000);
   }
 
   function tryInject(body) {
     if (processed.has(body)) return;
     processed.add(body);
-    console.log('[UC] tryInject: new body element detected, scheduling injection');
-    // 1500ms gives Gmail time to finish loading draft content so we can clean
-    // it all up in one shot before injecting our fresh snippet
-    setTimeout(() => { injectSnippet(body); watchBody(body); }, 1500);
+    // Wait until the compose loses focus before touching the contenteditable —
+    // modifying it while focused locks Gmail's compose and requires an extra click to escape.
+    setTimeout(() => scheduleInjectWhenUnfocused(body), 1500);
+  }
+
+  function scheduleInjectWhenUnfocused(body) {
+    if (!document.body.contains(body)) return;
+    const isFocused = body === document.activeElement || body.contains(document.activeElement);
+    if (!isFocused) {
+      injectSnippet(body);
+      watchBody(body);
+    } else {
+      // focusout bubbles; relatedTarget lets us ignore focus moving within the body
+      body.addEventListener('focusout', function handler(e) {
+        if (body.contains(e.relatedTarget)) return;
+        body.removeEventListener('focusout', handler);
+        if (document.body.contains(body)) { injectSnippet(body); watchBody(body); }
+      });
+    }
   }
 
   let observerTimer = null;
