@@ -110,42 +110,24 @@
   }
 
   const bodyFacts = new WeakMap();
-  const processed = new WeakSet();
-  let isSending = false;
+  const registered = new WeakSet();
 
-  // Remove stale snippets from inside the contenteditable (saved draft leftovers)
   function findSavedSnippets(container) {
-    return [...container.querySelectorAll('div[contenteditable="false"]')]
-      .filter(el => el.querySelector('a[href*="unskippable.vercel.app"]'));
+    return [...container.querySelectorAll('a[href*="unskippable.vercel.app"]')]
+      .map(a => a.closest('div[contenteditable="false"]'))
+      .filter(Boolean);
   }
 
-  // Show a preview div as a sibling of the body — outside the contenteditable
-  // so Gmail never sees it as compose activity and never activates its focus trap.
-  function showPreview(body) {
-    if (!document.body.contains(body)) return;
-    let fact = bodyFacts.get(body);
-    if (!fact) { fact = getNextFact(); bodyFacts.set(body, fact); }
-
-    // Remove any existing preview for this compose
-    const parent = body.parentElement;
-    if (!parent) return;
-    parent.querySelectorAll('[data-uc-preview]').forEach(el => el.remove());
-
-    const preview = document.createElement('div');
-    preview.setAttribute('data-uc-preview', '1');
-    // Match the snippet style but live outside the contenteditable
-    preview.innerHTML = buildFactHTML(fact, 'bottom').replace(/^<br>/, '');
-    // Insert immediately after the body div
-    body.insertAdjacentElement('afterend', preview);
-  }
-
-  function tryInject(body) {
-    if (processed.has(body)) return;
-    processed.add(body);
-    // Clean up any stale in-body snippets from saved drafts, then show preview
+  // Pre-assign a fact when a compose body is first detected so the same
+  // fact is used if the user sends without ever triggering re-detection.
+  function registerBody(body) {
+    if (registered.has(body)) return;
+    registered.add(body);
+    if (!bodyFacts.has(body)) bodyFacts.set(body, getNextFact());
+    // Remove stale snippets left over from a previously saved draft.
+    // We only remove here — never insert — so Gmail's focus trap never fires.
     setTimeout(() => {
       findSavedSnippets(body).forEach(el => el.remove());
-      showPreview(body);
     }, 1500);
   }
 
@@ -153,13 +135,15 @@
   const observer = new MutationObserver(() => {
     clearTimeout(observerTimer);
     observerTimer = setTimeout(() => {
-      document.querySelectorAll('div[aria-label="Message Body"]').forEach(tryInject);
+      document.querySelectorAll('div[aria-label="Message Body"]').forEach(registerBody);
     }, 300);
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
 
-  // On send: guarantee exactly one snippet at the end
+  // Only write to the contenteditable at send time — this is the sole DOM
+  // mutation we make inside the body, and it doesn't matter at that point
+  // because Gmail is already committed to sending.
   document.addEventListener('click', (e) => {
     const isSend =
       e.target.closest('[data-tooltip*="Send"]') ||
@@ -168,9 +152,6 @@
 
     const body = document.querySelector('div[aria-label="Message Body"]');
     if (!body) return;
-
-    isSending = true;
-    setTimeout(() => { isSending = false; }, 2000);
 
     findSavedSnippets(body).forEach(el => el.remove());
     const fact = bodyFacts.get(body) || getNextFact();
