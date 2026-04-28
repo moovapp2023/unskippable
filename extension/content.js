@@ -123,12 +123,25 @@
   function registerBody(body) {
     if (registered.has(body)) return;
     registered.add(body);
+    console.log('[UC] compose body registered');
     if (!bodyFacts.has(body)) bodyFacts.set(body, getNextFact());
-    // Remove stale snippets left over from a previously saved draft.
-    // We only remove here — never insert — so Gmail's focus trap never fires.
     setTimeout(() => {
-      findSavedSnippets(body).forEach(el => el.remove());
+      const stale = findSavedSnippets(body);
+      console.log('[UC] stale snippet cleanup — found:', stale.length);
+      stale.forEach(el => el.remove());
     }, 1500);
+
+    // Watch for focus trap activation: log every click so we can see
+    // whether the overlay appears before or after our code does anything
+    document.addEventListener('click', (e) => {
+      console.log('[UC] click —', e.target.tagName, e.target.className?.toString().slice(0, 40), '| activeElement:', document.activeElement?.getAttribute('aria-label') || document.activeElement?.tagName);
+    }, true);
+    document.addEventListener('focusin', (e) => {
+      console.log('[UC] focusin —', e.target.getAttribute('aria-label') || e.target.tagName);
+    });
+    document.addEventListener('focusout', (e) => {
+      console.log('[UC] focusout —', e.target.getAttribute('aria-label') || e.target.tagName, '→', e.relatedTarget?.getAttribute('aria-label') || e.relatedTarget?.tagName || 'null');
+    });
   }
 
   let observerTimer = null;
