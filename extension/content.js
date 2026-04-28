@@ -164,7 +164,8 @@
       body.addEventListener('focusout', function handler(e) {
         if (body.contains(e.relatedTarget)) return;
         body.removeEventListener('focusout', handler);
-        if (document.body.contains(body)) { injectSnippet(body); watchBody(body); }
+        // Defer past mouseup/click so the DOM mutation doesn't shift the click target
+        setTimeout(() => { if (document.body.contains(body)) { injectSnippet(body); watchBody(body); } }, 0);
       });
     }
   }
