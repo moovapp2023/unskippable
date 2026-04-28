@@ -153,19 +153,37 @@
     setTimeout(() => scheduleInjectWhenUnfocused(body), 1500);
   }
 
+  // Log focus changes on the compose body so we can trace the double-click cause
+  function attachFocusDiagnostics(body) {
+    document.addEventListener('focusin', (e) => {
+      if (body.contains(e.target)) console.log('[UC] FOCUSIN compose', e.target.tagName);
+    });
+    document.addEventListener('focusout', (e) => {
+      if (body === e.target || body.contains(e.target))
+        console.log('[UC] FOCUSOUT compose → relatedTarget:', e.relatedTarget?.tagName, e.relatedTarget?.getAttribute?.('aria-label'));
+    });
+    document.addEventListener('click', (e) => {
+      console.log('[UC] CLICK', e.target.tagName, e.target.getAttribute?.('aria-label') || e.target.className?.toString().slice(0,40));
+    }, true);
+  }
+
   function scheduleInjectWhenUnfocused(body) {
     if (!document.body.contains(body)) return;
+    attachFocusDiagnostics(body);
     const isFocused = body === document.activeElement || body.contains(document.activeElement);
     if (!isFocused) {
       injectSnippet(body);
       watchBody(body);
     } else {
-      // focusout bubbles; relatedTarget lets us ignore focus moving within the body
       body.addEventListener('focusout', function handler(e) {
         if (body.contains(e.relatedTarget)) return;
         body.removeEventListener('focusout', handler);
-        // Defer past mouseup/click so the DOM mutation doesn't shift the click target
-        setTimeout(() => { if (document.body.contains(body)) { injectSnippet(body); watchBody(body); } }, 0);
+        console.log('[UC] focusout fired — scheduling injection');
+        setTimeout(() => {
+          console.log('[UC] injecting (deferred). activeElement now:', document.activeElement?.getAttribute?.('aria-label') || document.activeElement?.tagName);
+          if (document.body.contains(body)) { injectSnippet(body); watchBody(body); }
+          setTimeout(() => console.log('[UC] post-inject activeElement:', document.activeElement?.getAttribute?.('aria-label') || document.activeElement?.tagName), 100);
+        }, 0);
       });
     }
   }
